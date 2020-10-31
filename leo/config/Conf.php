@@ -8,7 +8,7 @@ class Conf {
     // A l'IUT, vous avez une BDD nommee comme votre login
     // Sur votre machine, vous devrez creer une BDD
     'database' => 'marinl',
-    // A l'IUT, c'est votre login
+    // A l'IUT, c'est votre loginedzazd
     // Sur votre machine, vous avez surement un compte 'root'
     'login' => 'marinl',
     // A l'IUT, c'est votre mdp (INE par defaut)
