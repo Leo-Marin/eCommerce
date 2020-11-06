@@ -1,0 +1,489 @@
+	 /* CSS GENERAL*/
+	 @font-face{
+	 	font-family: "plice";
+	 	src:url(./coucou.ttf);
+	 }
+	 @font-face{
+	 	font-family: "plice2";
+	 	src:url(./BLKCHCRY.ttf);
+	 }
+	  
+	 	  @font-face{
+	 	font-family: "pate";
+	 	src:url(./pate.ttf);
+	 }
+	  
+	  
+	   @font-face{
+	 	font-family: "fin";
+	 	src:url(./fin.ttf);
+	 }
+	 html{
+	 	background-color: #E8E8E8;
+	 	font-size: 1.5rem;
+	 	font-family: "fin","pate", "plice2";
+
+	 }
+	 header{
+	 	background-color: black;
+	 	color: white;
+	 	position: fixed;
+	 	width: 100%;
+	 	top: 0px;
+	 	height: 8%;
+
+	 	z-index: 1000;
+	 	margin-bottom: 0px;
+
+
+	 }
+
+	 body{
+	 	background-color: #E8E8E8;
+	 	margin:auto;
+	 	width: 100%;
+
+
+	 }
+	 main{
+	 	background-color: #E8E8E8;
+	 	position: relative;
+	 	top: 10vh;
+	 }
+
+	 main>div{
+	 	background-color: #dcdcdc;
+	 	width: 75%;
+	 	position: relative;
+	 	margin: auto;
+	 	padding: 15px;
+	 	border: 02px outset;
+	 	margin-top: 10px;
+	 	margin-bottom: 10px;
+		/*background-image: radial-gradient(ellipse at left, #9FB7A3,white);
+		border-image: radial-gradient(ellipse at left, #9FB7A3,white);*/
+		z-index: 0;
+
+
+		
+	}
+
+
+	body>p{
+		width: 75%;
+	}
+	h1, h2, h5{
+		text-align: center;
+	}
+	h1{
+		font-size: 7em;
+		
+		color:#3CB371;
+	}
+	h2{
+		color: #32CD32;
+	}
+
+	article{
+		align-items: center;
+	}
+	strong{
+		font-size: 2em;
+	}
+	a{
+		color:#3CB371;
+		text-decoration: none;
+	}
+	.titre2nd{
+		font-size: 5em;
+		color:#3CB371;
+	}
+	em{
+		text-decoration: line-through  #32CD32;
+		text-decoration-style: double;
+	}
+	/*ACCEUIL*/
+	div.acceuil{
+		
+		height: 85vh;
+		width: 90vw;
+		margin-top: 0px;
+		align-items: center;
+		align-content: center;
+		margin-bottom: 100px;
+		vertical-align: middle;
+
+	}
+	blockquote{
+		background-color: #E8E8E8;
+		font-size: 3em;
+		color: black;
+		text-align: center;
+	}
+	div.acceuil>p{
+		font-size: 2em;
+		background-color: #E8E8E8;
+		color: black;
+		text-align: center;
+	}
+
+
+	/*REPONSE*/
+	div.reponse{
+		
+		height: 85vh;
+		width: 90vw;
+		margin-top: 0px;
+		align-items: center;
+		align-content: center;
+		margin-bottom: 100px;
+		vertical-align: middle;
+
+	}
+
+	div.reponse>p{
+		font-size: 2em;
+		background-color: #E8E8E8;
+		color: black;
+		text-align: center;
+		margin-top: 40vh;
+	}
+
+
+	/* Menu NAV*/
+	nav a{
+		text-decoration: none;
+	}
+	nav{
+		background-color: black;
+		color: white;
+		height: 90%;
+		top: 3px;
+		
+		position: relative;
+		
+
+		
+		
+
+	}
+
+	nav>div:first-child{
+		
+		
+		display: inline;
+		position: relative;
+		left: 0px;
+		
+
+		
+	}
+	nav>div:nth-child(2){
+		box-sizing: content-box;
+
+		background-color: #dcdcdc;
+		text-align: center;
+		color: #32CD32;
+		width: 10%;
+		height: 100%;
+
+		display: inline;
+		position: absolute;
+		
+		right: 40%;
+		
+		border: 1px solid black;
+		
+	}
+	nav>div:nth-child(3){
+		color: #32CD32;
+		background-color: #dcdcdc;
+		text-align: center;
+
+		vertical-align: middle;
+		width: 10%;
+		height: 100%;
+
+		display: inline;
+		position: absolute;
+		
+		right: 30%;
+		border: 1px solid black;
+		
+
+
+		
+	}
+	nav>div:nth-child(4){
+		color: #32CD32;
+		background-color:#dcdcdc;
+		text-align: center;
+		vertical-align: middle;
+		width: 10%;
+		height: 100%;
+
+		
+		display: inline;
+		position: absolute;
+
+		right: 20%;
+		border: 1px solid black;
+
+
+		
+	}
+	nav>div:nth-child(5){
+		color: #32CD32;
+		background-color:#dcdcdc;
+		text-align: center;
+		vertical-align: middle;
+		width: 10%;
+		height: 100%;
+
+
+		
+		display: inline;
+		position: absolute;
+
+		right: 10%;
+		border: 1px solid black;
+
+
+		
+	}
+	div.lien>a{
+		color: #32CD32;
+		display: block;
+		
+		position: relative;
+		vertical-align: middle;
+		top: 20px;
+		text-decoration: none;
+
+	}
+	nav p{
+		position: relative;
+		bottom: 4px;
+	}
+
+
+
+	nav>div>.submenu {
+		text-decoration: none;
+		
+		bottom: 15px;
+		
+		background-color: #dcdcdc;
+		display:none;
+		text-align: center;
+		position: relative;
+		
+		border-top: 1px solid black;
+		border-bottom: 1px solid black;
+		border-right:  1px solid black;
+		border-left:  1px solid black;
+
+	}
+
+
+
+	nav>div:hover>.submenu {
+		display:block;
+	}
+	.logo{
+		position: relative;
+		height: 70px;
+		left: 5px;
+	}
+
+
+	/* Menu deroulant dans la page*/
+	ul>div>.submenu {
+		position: relative;
+		top: 90%;
+		left: 12.5%;
+		
+		width: 60%;
+		background-color: #aca;
+		display:none;
+		text-align: center;
+
+
+	}
+
+
+	ul>div:hover>.submenu {
+		display:block;
+	}
+
+
+
+
+
+	/* TABLEAU main.html*/
+	.image_petite{
+		width: 20px;
+		height: 15px;
+		
+	}
+	table{
+		width: 100%;
+		text-align: center;
+		background-color: white;
+	}
+
+	tr > th{
+
+		text-align: center;
+		background: white;
+		width: 10%;
+		margin-right: 0%;
+	}
+	tr > th:nth-child(odd){
+		background-color:  #32CD32;
+
+	}
+	tr > th:nth-child(even){
+		background-color:  #3CB371;
+
+	}
+
+	tr:nth-child(odd){
+		background-color: #DFE4E2;
+
+	}
+	tr:nth-child(even){
+		background-color:   #E8E8E8;
+
+	}
+	tr:hover{
+		background-color:#E3F9DE;
+		transition:  0.5s;
+	}
+	tr{
+		margin-right: 0%;
+	}
+
+
+	/* equipe.html*/
+
+	.photo_eq{
+		height: 90px;
+		margin: auto;
+	}
+	.photo_eq:hover{
+
+		height:  150px;
+	}
+	.equipe>h4{
+		
+		text-align: center;
+		color:   #32CD32;
+	}
+	.equipe>p{
+		
+		text-align: center;
+	}
+	.equipe>img{
+		display: block;
+		
+		margin: auto;
+	}
+
+
+	/*faq.html*/
+
+	div.faq>a{
+		display: block;
+		background-color: #E8E8E8;
+		margin: 5px;
+		color: #32CD32;
+
+		text-decoration: none;
+	}
+
+
+
+	/*RESPONSIVE*/
+	@media(max-width:1600px){
+		nav{
+			background-color: black;
+			color: white;
+			height: 90%;
+			top: 3px;
+
+			position: sticky;
+
+		}
+
+		nav>div:first-child{
+
+
+			display: inline;
+			position: relative;
+			left: 0px;
+
+
+
+		}
+		nav>div:nth-child(2){
+			
+			width: 20%;
+			right: 65%;
+
+		}
+		nav>div:nth-child(3){
+			
+			width: 20%;
+			right: 45%;
+
+		}
+		nav>div:nth-child(4){
+			
+			width: 20%;
+			right: 25%;
+
+		}
+		nav>div:nth-child(5){
+			
+			width: 20%;
+			right: 5%;
+			
+		}
+		
+
+		.logo{
+			
+			height: 90px;
+			
+		}
+
+
+
+	}
+
+
+
+
+	@media(max-width:1000px ){
+		header{
+			height: 5%;
+		}
+		.logo{
+			position: relative;
+			height: 80px;
+			left: 5px;
+		}
+
+		nav>div>p{
+
+			
+		}
+		.lien>a{
+
+			top: 15px;
+			bottom: 0;
+		}
+
+
+	}
