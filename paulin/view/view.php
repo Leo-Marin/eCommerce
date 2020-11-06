@@ -22,6 +22,6 @@
     
     
     <footer>
-        <p style="border: 1px solid black;text-align:right; padding-right:1em;"> Site de covoiturage de Paulin </p>
+        <p style="border: 1px solid black;text-align:right; padding-right:1em;"> Site de vente de livre </p>
     </footer>
 </html>
