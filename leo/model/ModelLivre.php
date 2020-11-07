@@ -11,7 +11,8 @@
  *
  * @author leoledino
  */
-require_once File::build_path(array("model","Model.php"));
+require_once File::build_path(array("model", "Model.php"));
+
 class ModelLivre {
 
     private $numLivre;
@@ -25,94 +26,119 @@ class ModelLivre {
     private $format;
 
     // un getter      
-    public function getMarque() {
-        return $this->marque;
-    }
-
     // un setter 
-    public function setMarque($marque2) {
-        $this->marque = $marque2;
-    }
 
-    public function __construct($m = NULL, $c = NULL, $i = NULL) {
-        if (!is_null($m) && !is_null($c) && !is_null($i)) {
+
+    public function __construct($na = NULL, $d = NULL, $l = NULL, $t = NULL, $c = NULL, $nbp = NULL, $ne = NULL, $f = NULL) {
+        if (!is_null($nl) && !is_null($na) && !is_null($d) && !is_null($l) && !is_null($t) && !is_null($c) && !is_null($nbp && !is_null($ne) && !is_null($f))) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
-            $this->marque = $m;
-            $this->couleur = $c;
-            $this->immatriculation = $i;
+            $this->numAuteur = $na;
+            $this->datePublication = $d;
+            $this->langue = $l;
+            $this->titre = $t;
+            $this->nbPage = $nbp;
+            $this->numEditeur = $ne;
+            $this->format = $f;
         }
     }
 
     // une methode d'affichage.
-    /*public function afficher() {
-        return "<li> Marque : " . $this->marque . "</li>" .
-                "<li> Couleur : " . $this->couleur . "</li>" .
-                "<li> Immatriculation : " . $this->immatriculation . "</li>";
-    }*/
-
-    public function getImmatriculation() {
-        return $this->immatriculation;
+    /* public function afficher() {
+      return "<li> Marque : " . $this->marque . "</li>" .
+      "<li> Couleur : " . $this->couleur . "</li>" .
+      "<li> Immatriculation : " . $this->immatriculation . "</li>";
+      } */
+    public function getnumLivre() {
+        return $this->numLivre;
     }
 
-    public function getCouleur() {
-        return $this->couleur;
+    public function getnumAuteur() {
+        return $this->numAuteur;
     }
 
-    public function setImmatriculation($imma2) {
-        if (strlen($imma2) > 8) {
-            echo "Nombre de caractère supérieur à la limite (8).";
-        } else {
-            $this->immatriculation = $imma2;
-        }
+    public function getdatePublication() {
+        return $this->datePublication;
     }
 
-    public function setCouleur($couleur2) {
-        $this->couleur = $couleur2;
+    public function getLangue() {
+        return $this->langue;
     }
 
-    public static function getAllVoitures() {
-        $rep = (Model::$pdo)->query("Select * From voiture");
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
+    public function getTitre() {
+        return $this->titre;
+    }
+    
+    public function getCategorie() {
+        return $this->categorie;
+    }
+    
+    public function getnbPage() {
+        return $this->nbPage;
+    }
+
+    public function getnumEditeur() {
+        return $this->numEditeur;
+    }
+    
+    public function getFormat() {
+        return $this->format;
+    }
+
+
+
+    public static function getAllLivre() {
+        $rep = (Model::$pdo)->query("Select * From livre");
+        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelLivre');
         $tab_voit = $rep->fetchAll();
         return $tab_voit;
     }
 
-    public static function getVoitureByImmat($immat) {
-        $sql = "SELECT * from voiture WHERE immatriculation=:nom_tag";
+    public static function getLivreByNumLivre($numl) {
+        $sql = "SELECT * from livre WHERE numLivre=:nom_tag";
         // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
 
         $values = array(
-            "nom_tag" => $immat,
+            "nom_tag" => $numl,
                 //nomdutag => valeur, ...
         );
         // On donne les valeurs et on exécute la requête	 
         $req_prep->execute($values);
 
         // On récupère les résultats comme précédemment
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
-        $tab_voit = $req_prep->fetchAll();
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelLivre');
+        $tab_livre = $req_prep->fetchAll();
         // Attention, si il n'y a pas de résultats, on renvoie false
-        if (empty($tab_voit))
+        if (empty($tab_livre))
             return false;
-        return $tab_voit[0];
+        return $tab_livre[0];
     }
 
     public function save() {
         try {
-            $marque = $this->marque;
-            $immatriculation = $this->immatriculation;
-            $couleur = $this->couleur;
+            $this->numLivre = $nl;
+            $na = $this->numAuteur;
+            $d = $this->datePublication;
+            $l = $this->langue;
+            $t = $this->titre;
+            $nbp = $this->nbPage;
+            $ne = $this->numEditeur;
+            $f = $this->format;
 
-            $sql = "INSERT INTO voiture (immatriculation, couleur, marque  ) VALUES ( :imm, :coul, :mar)";
+            $sql = "INSERT INTO livre (numLivre, numAuteur, datePublication, langue , titre, nbPage, numEditeur, format  ) VALUES ( :nl, :na, :d, :l, :t, :nbp, :ne, :f)";
             // Préparation de la requête
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
-                "imm" => $immatriculation,
-                "coul" => $couleur,
-                "mar" => $marque,
+                "nl" => $nl,
+                "na" => $na,
+                "d" => $d,
+                "l" => $l,
+                "t" => $t,
+                "nbp" => $nbp,
+                "ne" => $ne,
+                "f" => $f,
             );
             $req_prep->execute($values);
         } catch (PDOException $e) {
