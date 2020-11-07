@@ -31,14 +31,16 @@ class ModelAuteur {
         $this->marque = $marque2;
     }
 
-    public function __construct($m = NULL, $c = NULL, $i = NULL) {
+    public function __construct($num = NULL, $n = NULL, $p = NULL, $na = NULL, $da = NULL) {
         if (!is_null($m) && !is_null($c) && !is_null($i)) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
-            $this->marque = $m;
-            $this->couleur = $c;
-            $this->immatriculation = $i;
+            $this->numAuteur = $num;
+            $this->nom = $n;
+            $this->prenom = $p;
+            $this->nationalite = $na;
+            $this->dateNaissance = $da;
         }
     }
 
