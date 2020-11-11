@@ -22,23 +22,19 @@ class ModelAuteur {
     private $dateNaissance;
 
     // un getter      
-    public function getMarque() {
-        return $this->marque;
-    }
 
-    // un setter 
-    public function setMarque($marque2) {
-        $this->marque = $marque2;
-    }
 
-    public function __construct($m = NULL, $c = NULL, $i = NULL) {
-        if (!is_null($m) && !is_null($c) && !is_null($i)) {
+    public function __construct( $n = NULL, $p = NULL, $na = NULL, $da = NULL) {
+        if (!is_null($n) && !is_null($p) && !is_null($na) && !is_null($da)) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
-            $this->marque = $m;
-            $this->couleur = $c;
-            $this->immatriculation = $i;
+            // $num = NULL,
+            //$this->numAuteur = $num;
+            $this->nom = $n;
+            $this->prenom = $p;
+            $this->nationalite = $na;
+            $this->dateNaissance = $da;
         }
     }
 
@@ -49,67 +45,94 @@ class ModelAuteur {
                 "<li> Immatriculation : " . $this->immatriculation . "</li>";
     }*/
 
-    public function getImmatriculation() {
-        return $this->immatriculation;
+    public function getNumAuteur() {
+        return $this->numAuteur;
     }
 
-    public function getCouleur() {
-        return $this->couleur;
+    public function getNom() {
+        return $this->nom;
+    }
+    
+    public function getPrenom() {
+        return $this->prenom;
+    }
+    
+    public function getNationalite() {
+        return $this->nationalite;
+    }
+    
+    public function getDateNaissance() {
+        return $this->dateNaissance;
     }
 
-    public function setImmatriculation($imma2) {
-        if (strlen($imma2) > 8) {
+    public function setNumAuteur($num) {
+        if (strlen($num) > 11) {
             echo "Nombre de caractère supérieur à la limite (8).";
         } else {
-            $this->immatriculation = $imma2;
+            $this->numAuteur= $num;
         }
     }
 
-    public function setCouleur($couleur2) {
-        $this->couleur = $couleur2;
+    public function setNom($num) {
+        $this->nom= $num;
     }
 
-    public static function getAllVoitures() {
-        $rep = (Model::$pdo)->query("Select * From voiture");
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
-        $tab_voit = $rep->fetchAll();
-        return $tab_voit;
+    public function setPrenom($num) {
+        $this->prenom= $num;
+    }
+    
+    public function setNationalite($num) {
+        $this->prenom= $num;
+    }
+    
+    public function setDateNaissance($num) {
+        $this->nationalite= $num;
+    }
+    
+    public static function getAllAuteurs() {
+        $rep = (Model::$pdo)->query("Select * From auteur");
+        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelAuteur');
+        $tab_aut = $rep->fetchAll();
+        return $tab_aut;
     }
 
-    public static function getVoitureByImmat($immat) {
-        $sql = "SELECT * from voiture WHERE immatriculation=:nom_tag";
+    public static function getAuteurByNum($num) {
+        $sql = "SELECT * from auteur WHERE numAuteur=:nom_tag";
         // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
 
         $values = array(
-            "nom_tag" => $immat,
-                //nomdutag => valeur, ...
+            "nom_tag" => $num,
         );
         // On donne les valeurs et on exécute la requête	 
         $req_prep->execute($values);
 
         // On récupère les résultats comme précédemment
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
-        $tab_voit = $req_prep->fetchAll();
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelAuteur');
+        $tab_aut = $req_prep->fetchAll();
         // Attention, si il n'y a pas de résultats, on renvoie false
-        if (empty($tab_voit))
+        if (empty($tab_aut))
             return false;
-        return $tab_voit[0];
+        return $tab_aut[0];
     }
 
     public function save() {
         try {
-            $marque = $this->marque;
-            $immatriculation = $this->immatriculation;
-            $couleur = $this->couleur;
+            //$numAuteur = $this->numAuteur;
+            $nom = $this->nom;
+            $prenom = $this->prenom;
+            $nationalite= $this->nationalite;
+            $dateNaissance = $this->dateNaissance;
 
-            $sql = "INSERT INTO voiture (immatriculation, couleur, marque  ) VALUES ( :imm, :coul, :mar)";
+            $sql = "INSERT INTO Auteur ( nom, prenom, nationalite, dateNaissance  ) VALUES ( :nom, :pre, :nat, :dat)";
             // Préparation de la requête
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
-                "imm" => $immatriculation,
-                "coul" => $couleur,
-                "mar" => $marque,
+                //"num" => $numAuteur,
+                "nom" => $nom,
+                "pre" => $prenom,
+                "nat" => $nationalite,
+                "dat" => $dateNaissance,
             );
             $req_prep->execute($values);
         } catch (PDOException $e) {

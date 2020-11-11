@@ -91,8 +91,8 @@ class ModelLivre {
     public static function getAllLivre() {
         $rep = (Model::$pdo)->query("Select * From livre");
         $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelLivre');
-        $tab_voit = $rep->fetchAll();
-        return $tab_voit;
+        $tab_livre = $rep->fetchAll();
+        return $tab_livre;
     }
 
     public static function getLivreByNumLivre($numl) {
@@ -118,7 +118,7 @@ class ModelLivre {
 
     public function save() {
         try {
-            $this->numLivre = $nl;
+            $nl = $this->numLivre;
             $na = $this->numAuteur;
             $d = $this->datePublication;
             $l = $this->langue;

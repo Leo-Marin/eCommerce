@@ -8,7 +8,7 @@ class ControllerLivre {
         $view = 'list';
         $pagetitle = 'Liste des Livres';
         $controller = 'livre';
-        $tab_l = ModelLivre::getAllLivre();     //appel au modèle pour gerer la BD
+        $tab_livre = ModelLivre::getAllLivre();     //appel au modèle pour gerer la BD
         require File::build_path(array("view", "view.php"));  //"redirige" vers la vue
     }
 
@@ -16,9 +16,9 @@ class ControllerLivre {
         $controller = 'livre';
         $pagetitle = 'livre Caracterisations';
         $numl = $_GET['numLivre'];
-        $v = ModelLivre::getLivreByNumLivre($numl);
+        $livre = ModelLivre::getLivreByNumLivre($numl);
 
-        if ($v == null) {
+        if ($livre == null) {
             $view = 'error';
             require File::build_path(array("view", "view.php"));
         } else {
@@ -44,7 +44,7 @@ class ControllerLivre {
         $nbp = $_GET['nbPage'];
         $ne = $_GET['numEditeur'];
         $f = $_GET['format'];
-        $livre1 = new ModelVoiture($na, $d, $l, $t, $c, $nbp, $ne, $f);
+        $livre1 = new ModelLivre($na, $d, $l, $t, $c, $nbp, $ne, $f);
         $livre1->save();
         ControllerLivre::readAll();
     }

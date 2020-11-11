@@ -11,48 +11,52 @@
  *
  * @author leoledino
  */
-require_once File::build_path(array("model","Model.php"));
+require_once File::build_path(array("model", "Model.php"));
+
 class ModelEditeur {
 
     private $numEditeur;
     private $nom;
-    private $nationalie;
+    private $nationalite;
     private $nomProprietaire;
 
-    // un getter      
-    public function getMarque() {
-        return $this->marque;
-    }
+     
 
-    // un setter 
-    public function setMarque($marque2) {
-        $this->marque = $marque2;
-    }
-
-    public function __construct($m = NULL, $c = NULL, $i = NULL) {
-        if (!is_null($m) && !is_null($c) && !is_null($i)) {
+    public function __construct($ne = NULL, $n = NULL, $na = NULL, $np = NULL) {
+        if (!is_null($ne) && !is_null($n) && !is_null($na) && !is_null($np)) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
-            $this->marque = $m;
-            $this->couleur = $c;
-            $this->immatriculation = $i;
+            $this->numEditeur = $ne;
+            $this->nom = $n;
+            $this->nationalite = $na;
+            $this->nomProprietaire = $np;
         }
     }
 
     // une methode d'affichage.
-    /*public function afficher() {
-        return "<li> Marque : " . $this->marque . "</li>" .
-                "<li> Couleur : " . $this->couleur . "</li>" .
-                "<li> Immatriculation : " . $this->immatriculation . "</li>";
-    }*/
+    /* public function afficher() {
+      return "<li> Marque : " . $this->marque . "</li>" .
+      "<li> Couleur : " . $this->couleur . "</li>" .
+      "<li> Immatriculation : " . $this->immatriculation . "</li>";
+      } */
 
-    public function getImmatriculation() {
-        return $this->immatriculation;
+      // LES GETTERS
+    
+    public function getnumEditeur() {
+        return $this->numEditeur;
     }
 
-    public function getCouleur() {
-        return $this->couleur;
+    public function getNom() {
+        return $this->nom;
+    }
+
+    public function getNationalie() {
+        return $this->nationalite;
+    }
+
+    public function getnomProprietaire() {
+        return $this->nomProprietaire;
     }
 
     public function setImmatriculation($imma2) {
@@ -67,47 +71,50 @@ class ModelEditeur {
         $this->couleur = $couleur2;
     }
 
-    public static function getAllVoitures() {
-        $rep = (Model::$pdo)->query("Select * From voiture");
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
-        $tab_voit = $rep->fetchAll();
-        return $tab_voit;
+    public static function getAllEditeur() {
+        $rep = (Model::$pdo)->query("Select * From Editeur");
+        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelEditeur');
+        $tab_edit = $rep->fetchAll();
+        return $tab_edit;
     }
 
-    public static function getVoitureByImmat($immat) {
-        $sql = "SELECT * from voiture WHERE immatriculation=:nom_tag";
+    public static function getEditeurByNum($numE) {
+        $sql = "SELECT * from editeur WHERE numEditeur=:nom_tag";
         // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
 
         $values = array(
-            "nom_tag" => $immat,
+            "nom_tag" => $numE,
                 //nomdutag => valeur, ...
         );
         // On donne les valeurs et on exécute la requête	 
         $req_prep->execute($values);
 
         // On récupère les résultats comme précédemment
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
-        $tab_voit = $req_prep->fetchAll();
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelEditeur');
+        $tab_edit = $req_prep->fetchAll();
         // Attention, si il n'y a pas de résultats, on renvoie false
-        if (empty($tab_voit))
+        if (empty($tab_edit))
             return false;
-        return $tab_voit[0];
+        return $tab_edit[0];
     }
 
     public function save() {
         try {
-            $marque = $this->marque;
-            $immatriculation = $this->immatriculation;
-            $couleur = $this->couleur;
+            $ne = $this->numEditeur;
+            $n = $this->nom;
+            $na = $this->nationalite;
+            $np = $this->nomProprietaire;
 
-            $sql = "INSERT INTO voiture (immatriculation, couleur, marque  ) VALUES ( :imm, :coul, :mar)";
+            $sql = "INSERT INTO editeur (numEditeur, nom, nationalite, nomProprietaire  ) VALUES ( :ne, :n, :na, :np)";
             // Préparation de la requête
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
-                "imm" => $immatriculation,
-                "coul" => $couleur,
-                "mar" => $marque,
+                "ne" => $ne,
+                "n" => $n,
+                "na" => $na,
+                "np" => $np,
+                
             );
             $req_prep->execute($values);
         } catch (PDOException $e) {
