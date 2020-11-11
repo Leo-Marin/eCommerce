@@ -14,7 +14,7 @@
         </p>
         <p>
             <label for="n_id">nom</label> :
-            <input type="text" placeholder="Ex : " name="ben Laden" id="n_id" required/>
+            <input type="text" placeholder="Ex : ben Laden" name="nom" id="n_id" required/>
         </p>
         <p>
             <label for="ap_id">adressePostale</label> :

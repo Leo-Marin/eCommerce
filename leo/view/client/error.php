@@ -1,7 +1,7 @@
 
 <?php
 
-echo "Aucun Livre ne correspond à votre numero";
+echo "Aucun Client ne correspond à votre numero";
 ?>
 
 
