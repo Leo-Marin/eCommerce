@@ -2,7 +2,7 @@
 
 require_once File::build_path(["model", "ModelEditeur.php"]);
 
-class ControllerLivre {
+class ControllerEditeur {
 
     public static function readAll() {
         $view = 'list';
