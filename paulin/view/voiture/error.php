@@ -1,4 +1,8 @@
 
-        <?php
-            echo 'Pas de voiture pour cette immatriculation';
-        ?>
+
+<?php
+
+echo "Aucune voiture ne correspond à votre immatriculation";
+?>
+
+
