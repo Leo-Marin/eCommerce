@@ -8,17 +8,17 @@ class ControllerAuteur {
         $view = 'list';
         $pagetitle = 'Liste des auteurs';
         $controller = 'auteur';
-        $tab_v = ModelAuteur::getAllAuteurs();     //appel au modèle pour gerer la BD
+        $tab_aut = ModelAuteur::getAllAuteurs();     //appel au modèle pour gerer la BD
         require File::build_path(array("view", "view.php"));  //"redirige" vers la vue
     }
 
     public static function read() {
         $controller = 'auteur';
         $pagetitle = 'Auteur Caracterisations';
-        $num = $_GET['numAuteur'];
-        $n = ModelVoiture::getVoitureByImmat($num);
+        $numaut = $_GET['numAuteur'];
+        $aut = ModelAuteur::getAuteurByNum($numaut);
 
-        if ($n == null) {
+        if ($aut == null) {
             $view = 'error';
             require File::build_path(array("view", "view.php"));
         } else {
@@ -36,14 +36,13 @@ class ControllerAuteur {
     }
 
     public static function created() {
-        $numAuteur = $_GET['numAuteur'];
         $nom = $_GET['nom'];
         $prenom = $_GET['prenom'];
         $nationalite = $_GET['nationalite'];
         $dateNaissance = $_GET['dateNaissance'];
-        $auteur1 = new ModelAuteur($numAuteur,$nom,$prenom,$nationalite,$dateNaissance);
+        $auteur1 = new ModelAuteur($nom,$prenom,$nationalite,$dateNaissance);
         $auteur1->save();
-        ControllerVoiture::readAll();
+        ControllerAuteur::readAll();
     }
 
 }

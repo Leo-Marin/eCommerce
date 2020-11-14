@@ -3,6 +3,9 @@
     <fieldset>
 
         <legend>Creation Auteur :</legend>
+        <p> 
+            <input type ="hidden" name ="controller" value="auteur" />
+        </p>
         <p>
             <input type='hidden' name='action' value='created'>
             <label for="nom_id">Nom</label> :

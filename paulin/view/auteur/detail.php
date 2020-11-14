@@ -1,10 +1,10 @@
 
 <?php
-echo "<li> Numéro Auteur : " . htmlspecialchars($v->getNumAuteur()) . "</li>" .
- "<li> Nom : " . htmlspecialchars($v->getNom()) . "</li>" .
- "<li>Prenom : " . htmlspecialchars($v->getPrenom()) . "</li>".
- "<li>Nationalité : " . htmlspecialchars($v->getNationalite()) . "</li>".
- "<li>Date de naissance : " . htmlspecialchars($v->getDateNaissance()) . "</li>";
+echo "<li> Numéro Auteur : " . htmlspecialchars($aut->getNumAuteur()) . "</li>" .
+ "<li> Nom : " . htmlspecialchars($aut->getNom()) . "</li>" .
+ "<li>Prenom : " . htmlspecialchars($aut->getPrenom()) . "</li>".
+ "<li>Nationalité : " . htmlspecialchars($aut->getNationalite()) . "</li>".
+ "<li>Date de naissance : " . htmlspecialchars($aut->getDateNaissance()) . "</li>";
 ?>
 
 
