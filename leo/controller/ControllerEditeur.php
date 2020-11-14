@@ -8,7 +8,7 @@ class ControllerEditeur {
         $view = 'list';
         $pagetitle = 'Liste des Editeur';
         $controller = 'editeur';
-        $tab_edit = ModelEditeur::getAllEditeur();     //appel au modèle pour gerer la BD
+        $tab_edit = ModelEditeur::selectAll();     //appel au modèle pour gerer la BD
         require File::build_path(array("view", "view.php"));  //"redirige" vers la vue
     }
 
@@ -16,7 +16,7 @@ class ControllerEditeur {
         $controller = 'editeur';
         $pagetitle = 'Editeur Caracterisations';
         $numedit = $_GET['numEditeur'];
-        $editeur = ModelEditeur::getEditeurByNum($numedit);
+        $editeur = ModelEditeur::select($numedit);
 
         if ($editeur == null) {
             $view = 'error';
@@ -43,7 +43,7 @@ class ControllerEditeur {
 
         $edit1 = new ModelEditeur(/*$ne,*/ $n, $na, $np);
         $edit1->save();
-        ControllerEditeur::readAll();
+        ControllerEditeur::selectAll();
     }
 
 }

@@ -19,7 +19,8 @@ class ModelEditeur {
     private $nom;
     private $nationalite;
     private $nomProprietaire;
-
+    protected static $objet = 'editeur';
+    protected static $primary='numEditeur';
      
 
     public function __construct($n = NULL, $na = NULL, $np = NULL) {

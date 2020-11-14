@@ -20,7 +20,9 @@ class ModelClient {
     private $nom;
     private $adressePostale;
     private $adresseMail;
-
+    protected static $objet = 'client';
+    protected static $primary='numClient';
+    
     public function __construct($p = NULL, $n = NULL, $ap = NULL, $am = NULL) {
         if (!is_null($p) && !is_null($n) && !is_null($ap) && !is_null($am)) {
             // Si aucun de $m, $c et $i sont nuls,

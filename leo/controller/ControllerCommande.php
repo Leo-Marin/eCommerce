@@ -8,7 +8,7 @@ class ControllerCommande {
         $view = 'list';
         $pagetitle = 'Liste des Commandes';
         $controller = 'commande';
-        $tab_comma = ModelCommande::getAllCommande();     //appel au modèle pour gerer la BD
+        $tab_comma = ModelCommande::selectAll();     //appel au modèle pour gerer la BD
         require File::build_path(array("view", "view.php"));  //"redirige" vers la vue
     }
 
@@ -16,7 +16,7 @@ class ControllerCommande {
         $controller = 'commande';
         $pagetitle = 'Commande Details';
         $numco = $_GET['numCommande'];
-        $livre = ModelCommande::getCommandeByNum($numco);
+        $livre = ModelCommande::select($numco);
 
         if ($numco == null) {
             $view = 'error';
@@ -43,7 +43,7 @@ class ControllerCommande {
 
         $commande1 = new ModelCommande($nc, $d, $nl, $ncl);
         $commande1->save();
-        ControllerCommande::readAll();
+        ControllerCommande::selectAll();
     }
 
 }
