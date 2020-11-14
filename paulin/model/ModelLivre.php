@@ -30,7 +30,7 @@ class ModelLivre {
 
 
     public function __construct($na = NULL, $d = NULL, $l = NULL, $t = NULL, $c = NULL, $nbp = NULL, $ne = NULL, $f = NULL) {
-        if (!is_null($nl) && !is_null($na) && !is_null($d) && !is_null($l) && !is_null($t) && !is_null($c) && !is_null($nbp && !is_null($ne) && !is_null($f))) {
+        if (!is_null($na) && !is_null($d) && !is_null($l) && !is_null($t) && !is_null($c) && !is_null($nbp && !is_null($ne) && !is_null($f))) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
@@ -118,7 +118,6 @@ class ModelLivre {
 
     public function save() {
         try {
-            $nl = $this->numLivre;
             $na = $this->numAuteur;
             $d = $this->datePublication;
             $l = $this->langue;
@@ -127,11 +126,10 @@ class ModelLivre {
             $ne = $this->numEditeur;
             $f = $this->format;
 
-            $sql = "INSERT INTO livre (numLivre, numAuteur, datePublication, langue , titre, nbPage, numEditeur, format  ) VALUES ( :nl, :na, :d, :l, :t, :nbp, :ne, :f)";
+            $sql = "INSERT INTO livre (numLivre, numAuteur, datePublication, langue , titre, nbPage, numEditeur, format  ) VALUES ( NULL, :na, :d, :l, :t, :nbp, :ne, :f)";
             // Préparation de la requête
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
-                "nl" => $nl,
                 "na" => $na,
                 "d" => $d,
                 "l" => $l,

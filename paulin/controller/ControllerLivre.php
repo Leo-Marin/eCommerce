@@ -49,6 +49,13 @@ class ControllerLivre {
         ControllerLivre::readAll();
     }
 
+    public static function error() {
+        $controller = ('livre');
+        $view = 'error';
+        $pagetitle = 'Erreur';
+        require (File::build_path(array("view", "view.php")));
+    }
+
 }
 
 ?>

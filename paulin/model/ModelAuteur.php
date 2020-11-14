@@ -15,7 +15,7 @@ require_once File::build_path(array("model","Model.php"));
 
 class ModelAuteur {
 
-    private $numAuteur;
+
     private $nom;
     private $prenom;
     private $nationalite;
@@ -24,14 +24,13 @@ class ModelAuteur {
     // un getter      
 
 
-    public function __construct( $n = NULL, $p = NULL, $na = NULL, $da = NULL) {
-        if (!is_null($n) && !is_null($p) && !is_null($na) && !is_null($da)) {
+    public function __construct($p = NULL, $na = NULL, $da = NULL) {
+        if (!is_null($p) && !is_null($na) && !is_null($da)) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
             // $num = NULL,
             //$this->numAuteur = $num;
-            $this->nom = $n;
             $this->prenom = $p;
             $this->nationalite = $na;
             $this->dateNaissance = $da;
@@ -118,17 +117,15 @@ class ModelAuteur {
 
     public function save() {
         try {
-            //$numAuteur = $this->numAuteur;
             $nom = $this->nom;
             $prenom = $this->prenom;
             $nationalite= $this->nationalite;
             $dateNaissance = $this->dateNaissance;
 
-            $sql = "INSERT INTO Auteur ( nom, prenom, nationalite, dateNaissance  ) VALUES ( :nom, :pre, :nat, :dat)";
+            $sql = "INSERT INTO Auteur ( nom, prenom, nationalite, dateNaissance  ) VALUES (NULL, :pre, :nat, :dat)";
             // Préparation de la requête
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
-                //"num" => $numAuteur,
                 "nom" => $nom,
                 "pre" => $prenom,
                 "nat" => $nationalite,

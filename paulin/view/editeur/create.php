@@ -2,13 +2,12 @@
 <form method="get" action="index.php">
     <fieldset>
 
-        <legend>creation de livre:</legend>
-        <p>
-            <input type='hidden' name='action' value='created'>
-            <label for="ne_id">numEditeur</label> :
-            <input type="number" placeholder="Ex : 5" name="numEditeur" id="ne_id" required/>
+        <legend>creation d'editeur:</legend>
+        <p> 
+            <input type ="hidden" name ="controller" value="editeur" />
         </p>
         <p>
+            <input type='hidden' name='action' value='created'>
             <label for="n_id">nom</label> :
             <input type="text" placeholder="Ex : Gallimard" name="nom" id="n_id" required/>
         </p>

@@ -20,12 +20,11 @@ class ModelCommande {
     private $numLivre;
     private $numClient;
 
-    public function __construct($nc = NULL, $d = NULL, $nl = NULL, $ncl = NULL) {
-        if (!is_null(ncm) && !is_null($d) && !is_null($nl) && !is_null($ncl)) {
+    public function __construct($d = NULL, $nl = NULL, $ncl = NULL) {
+        if (!is_null($d) && !is_null($nl) && !is_null($ncl)) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
-            $this->numCommande = $nc;
             $this->date = $d;
             $this->numLivre = $nl;
             $this->numClient = $ncl;
@@ -99,16 +98,16 @@ class ModelCommande {
 
     public function save() {
         try {
-            $nc = $this->numCommande;
+
             $d = $this->date;
             $nl = $this->numLivre;
             $ncl = $this->numClient;
 
-            $sql = "INSERT INTO commande (numCommande, date, numLivre, numClient  ) VALUES ( :nc, :d, :nl, :ncl)";
+            $sql = "INSERT INTO commande (numCommande, date, numLivre, numClient  ) VALUES (NULL, :d, :nl, :ncl)";
             // Préparation de la requête
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
-                "nc" => $nc,
+
                 "d" => $d,
                 "nl" => $nl,
                 "ncl" => $ncl
