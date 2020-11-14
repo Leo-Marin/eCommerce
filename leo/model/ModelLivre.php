@@ -30,7 +30,7 @@ class ModelLivre {
 
 
     public function __construct($na = NULL, $d = NULL, $l = NULL, $t = NULL, $c = NULL, $nbp = NULL, $ne = NULL, $f = NULL) {
-        if (!is_null($nl) && !is_null($na) && !is_null($d) && !is_null($l) && !is_null($t) && !is_null($c) && !is_null($nbp && !is_null($ne) && !is_null($f))) {
+        if (!is_null($na) && !is_null($d) && !is_null($l) && !is_null($t) && !is_null($c) && !is_null($nbp && !is_null($ne) && !is_null($f))) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
