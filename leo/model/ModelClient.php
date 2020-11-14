@@ -15,18 +15,17 @@ require_once File::build_path(array("model", "Model.php"));
 
 class ModelClient {
 
-    private $numClient;
+
     private $prenom;
     private $nom;
     private $adressePostale;
     private $adresseMail;
 
-    public function __construct($nc = NULL, $p = NULL, $n = NULL, $ap = NULL, $am = NULL) {
-        if (!is_null($nc) && !is_null($p) && !is_null($n) && !is_null($ap) && !is_null($am)) {
+    public function __construct($p = NULL, $n = NULL, $ap = NULL, $am = NULL) {
+        if (!is_null($p) && !is_null($n) && !is_null($ap) && !is_null($am)) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
-            $this->numClient = $nc;
             $this->prenom = $p;
             $this->nom = $n;
             $this->adressePostale = $ap;
@@ -99,16 +98,15 @@ class ModelClient {
 
     public function save() {
         try {
-            $nc = $this->numClient;
+
             $p = $this->prenom;
             $n = $this->nom;
             $ap = $this->adressePostale;
             $am = $this->adresseMail;
-            $sql = "INSERT INTO client (numClient, prenom, nom, adressePostale, adresseMail) VALUES ( :nc, :p, :n, :ap, :am)";
+            $sql = "INSERT INTO client (numClient, prenom, nom, adressePostale, adresseMail) VALUES (NULL, :p, :n, :ap, :am)";
             // Préparation de la requête
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
-                "nc" => $nc,
                 "p" => $p,
                 "n" => $n,                
                 "ap" => $ap,

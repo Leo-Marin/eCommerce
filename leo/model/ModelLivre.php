@@ -118,7 +118,6 @@ class ModelLivre {
 
     public function save() {
         try {
-            $nl = $this->numLivre;
             $na = $this->numAuteur;
             $d = $this->datePublication;
             $l = $this->langue;
@@ -127,11 +126,10 @@ class ModelLivre {
             $ne = $this->numEditeur;
             $f = $this->format;
 
-            $sql = "INSERT INTO livre (numLivre, numAuteur, datePublication, langue , titre, nbPage, numEditeur, format  ) VALUES ( :nl, :na, :d, :l, :t, :nbp, :ne, :f)";
+            $sql = "INSERT INTO livre (numLivre, numAuteur, datePublication, langue , titre, nbPage, numEditeur, format  ) VALUES ( NULL, :na, :d, :l, :t, :nbp, :ne, :f)";
             // Préparation de la requête
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
-                "nl" => $nl,
                 "na" => $na,
                 "d" => $d,
                 "l" => $l,

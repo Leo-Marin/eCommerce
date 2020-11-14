@@ -22,12 +22,12 @@ class ModelEditeur {
 
      
 
-    public function __construct($ne = NULL, $n = NULL, $na = NULL, $np = NULL) {
-        if (!is_null($ne) && !is_null($n) && !is_null($na) && !is_null($np)) {
+    public function __construct($n = NULL, $na = NULL, $np = NULL) {
+        if (!is_null($n) && !is_null($na) && !is_null($np)) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
-            $this->numEditeur = $ne;
+   
             $this->nom = $n;
             $this->nationalite = $na;
             $this->nomProprietaire = $np;
@@ -72,7 +72,7 @@ class ModelEditeur {
     }
 
     public static function getAllEditeur() {
-        $rep = (Model::$pdo)->query("Select * From Editeur");
+        $rep = (Model::$pdo)->query("Select * From editeur");
         $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelEditeur');
         $tab_edit = $rep->fetchAll();
         return $tab_edit;
@@ -100,17 +100,15 @@ class ModelEditeur {
     }
 
     public function save() {
-        try {
-            $ne = $this->numEditeur;
+        try { 
             $n = $this->nom;
             $na = $this->nationalite;
             $np = $this->nomProprietaire;
 
-            $sql = "INSERT INTO editeur (numEditeur, nom, nationalite, nomProprietaire  ) VALUES ( :ne, :n, :na, :np)";
+            $sql = "INSERT INTO editeur (numEditeur, nom, nationalite, nomProprietaire  ) VALUES ( NULL, :n, :na, :np)";
             // Préparation de la requête
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
-                "ne" => $ne,
                 "n" => $n,
                 "na" => $na,
                 "np" => $np,

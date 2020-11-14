@@ -3,6 +3,9 @@
     <fieldset>
 
         <legend>creation de livre:</legend>
+        <p> 
+            <input type ="hidden" name ="controller" value="livre" />
+        </p>
         <p>
             <input type='hidden' name='action' value='created'>
             <label for="na_id">numAuteur</label> :

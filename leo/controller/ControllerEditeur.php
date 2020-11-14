@@ -6,7 +6,7 @@ class ControllerEditeur {
 
     public static function readAll() {
         $view = 'list';
-        $pagetitle = 'Liste des Livres';
+        $pagetitle = 'Liste des Editeur';
         $controller = 'editeur';
         $tab_edit = ModelEditeur::getAllEditeur();     //appel au modèle pour gerer la BD
         require File::build_path(array("view", "view.php"));  //"redirige" vers la vue
@@ -15,10 +15,10 @@ class ControllerEditeur {
     public static function read() {
         $controller = 'editeur';
         $pagetitle = 'Editeur Caracterisations';
-        $numl = $_GET['numEditeur'];
-        $livre = ModelEditeur::getEditeurByNum($numl);
+        $numedit = $_GET['numEditeur'];
+        $editeur = ModelEditeur::getEditeurByNum($numedit);
 
-        if ($livre == null) {
+        if ($editeur == null) {
             $view = 'error';
             require File::build_path(array("view", "view.php"));
         } else {
@@ -36,12 +36,12 @@ class ControllerEditeur {
     }
 
     public static function created() {
-        $ne = $_GET['numEditeur'];
+        //$ne = $_GET['numEditeur'];
         $n = $_GET['nom'];
         $na = $_GET['nationalite'];
         $np = $_GET['nomProprietaire'];
 
-        $edit1 = new ModelEditeur($ne, $n, $na, $np);
+        $edit1 = new ModelEditeur(/*$ne,*/ $n, $na, $np);
         $edit1->save();
         ControllerEditeur::readAll();
     }

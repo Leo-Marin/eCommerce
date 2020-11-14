@@ -3,6 +3,9 @@
     <fieldset>
 
         <legend>creation de livre:</legend>
+        <p> 
+            <input type ="hidden" name ="controller" value="commande" />
+        </p>
         <p>
             <input type='hidden' name='action' value='created'>
             <label for="nc_id">numCommande</label> :
@@ -20,7 +23,7 @@
             <label for="ncl_id">numClient</label> :
             <input type="text" placeholder="Ex : 14 " name="numClient" id="ncl_id" required/>
         </p> 
-    
+
         <p>
             <input type="submit" value="Envoyer" />
         </p>
