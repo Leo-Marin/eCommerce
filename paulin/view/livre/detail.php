@@ -8,5 +8,7 @@ echo "<li> Numéro Livre : " . htmlspecialchars($livre->getnumLivre()) . "</li>"
  "<li> Format : " . htmlspecialchars($livre->getFormat()) . "</li>" .
  "<li>Nombre de pages : " . htmlspecialchars($livre->getnbPage()) . "</li>".
  "<li>Editeur : " . htmlspecialchars($livre->getnumEditeur()) . "</li>";
+ 
+ echo '<a href="index.php?controller=commande&action=create">Commander mon livre</a>'
 
 ?>
