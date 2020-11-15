@@ -16,7 +16,7 @@ class ControllerClient {
         $controller = 'client';
         $pagetitle = 'Client details';
         $numcl = $_GET['numClient'];
-        $client = ModelClient::getClientByNum($numl);
+        $client = ModelClient::select($numl);
 
         if ($client == null) {
             $view = 'error';
@@ -45,7 +45,7 @@ class ControllerClient {
 
         $client1 = new ModelClient($nc, $p, $n, $ap, $am);
         $client1->save();
-        ControllerClient::readAll();
+        ControllerClient::selectAll();
     }
 
 }

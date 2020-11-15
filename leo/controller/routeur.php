@@ -11,7 +11,7 @@ require_once File::build_path(array("controller", "ControllerCommande.php"));
 
 
 if (!isset($_GET["controller"])){
-    $controller = $controller_default;
+    $controller = "livre";
 }
 else{
     $controller = $_GET["controller"];

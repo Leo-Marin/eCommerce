@@ -19,7 +19,9 @@ class ModelCommande {
     private $date;
     private $numLivre;
     private $numClient;
-
+    protected static $objet = 'commande';
+    protected static $primary='numCommande';
+    
     public function __construct($d = NULL, $nl = NULL, $ncl = NULL) {
         if (!is_null($d) && !is_null($nl) && !is_null($ncl)) {
             // Si aucun de $m, $c et $i sont nuls,

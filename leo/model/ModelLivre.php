@@ -24,7 +24,8 @@ class ModelLivre {
     private $nbPage;
     private $numEditeur;
     private $format;
-
+    protected static $objet = 'livre';
+    protected static $primary='numLivre';
     // un getter      
     // un setter 
 

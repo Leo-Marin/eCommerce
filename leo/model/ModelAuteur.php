@@ -13,14 +13,16 @@
  */
 require_once File::build_path(array("model","Model.php"));
 
-class ModelAuteur {
+class ModelAuteur extends Model{
 
 
     private $nom;
     private $prenom;
     private $nationalite;
     private $dateNaissance;
-
+    
+    protected static $objet = 'auteur';
+    protected static $primary='numAuteur';
     // un getter      
 
 
@@ -88,13 +90,6 @@ class ModelAuteur {
         $this->nationalite= $num;
     }
     
-    public static function getAllAuteurs() {
-        $rep = (Model::$pdo)->query("Select * From auteur");
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelAuteur');
-        $tab_aut = $rep->fetchAll();
-        return $tab_aut;
-    }
-
     public static function getAuteurByNum($num) {
         $sql = "SELECT * from auteur WHERE numAuteur=:nom_tag";
         // Préparation de la requête
