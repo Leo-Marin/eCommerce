@@ -1,6 +1,6 @@
 <?php
 
-require_once File::build_path(["model", "ModelLivre.php"]);
+require_once File::build_path(["model", "ModelCommande.php"]);
 
 class ControllerCommande {
 
@@ -36,14 +36,18 @@ class ControllerCommande {
     }
 
     public static function created() {
-//        $nc = $_GET['numCommande'];
-        $d = $_GET['date'];
-        $nl = $_GET['numLivre'];
-        $ncl = $_GET['numClient'];
-
-        $commande1 = new ModelCommande($d, $nl, $ncl);
-        $commande1->save();
-        ControllerCommande::selectAll();
+        $data = array(
+            "date" => $_GET["date"],
+            "numLivre" => $_GET["numLivre"],
+            "numClient" => $_GET["numClient"],
+        );
+        $commande1 = new ModelCommande($_GET['date'], $_GET['numLivre'], $_GET['numClient']);
+        ModelCommande::save($data);
+        $tab_co = ModelCommande::selectAll();
+        $controller = ('commande');
+        $view = 'created';
+        $pagetitle = 'Liste des commandes';
+        require (File::build_path(array("view", "view.php")));
     }
 
     public static function delete() {
@@ -97,7 +101,6 @@ class ControllerCommande {
             "date" => $_GET["date"],
             "numLivre" => $_GET["numLivre"],
             "numClient" => $_GET["numClient"],
-
         );
         $co = ModelCommande::select($numco);
         $co->update($data);

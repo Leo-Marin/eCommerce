@@ -8,10 +8,6 @@
         </p>
         <p>
             <input type='hidden' name='action' value='created'>
-            <label for="nc_id">numClient</label> :
-            <input type="number" placeholder="Ex : 5" name="numClient" id="nc_id" required/>
-        </p>
-        <p>
             <label for="p_id">prenom</label> :
             <input type="text" placeholder="Ex : Khaled" name="prenom" id="p_id" required/>
         </p>

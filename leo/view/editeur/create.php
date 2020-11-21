@@ -9,15 +9,15 @@
         <p>
             <input type='hidden' name='action' value='created'>
             <label for="n_id">nom</label> :
-            <input type="text" <?php echo "value=\"" . htmlspecialchars($n) . "\"" ?> name="nom" id="n_id" required/>
+            <input type="text" placeholder="Ex : Hachette" name="nom" id="n_id" required/>
         </p>
         <p>
             <label for="na_id">nationalite</label> :
-            <input type="text" <?php echo "value=\"" . htmlspecialchars($na) . "\"" ?> name="nationalite" id="na_id" required/>
+            <input type="text" placeholder="Ex : Juif" name="nationalite" id="na_id" required/>
         </p>
         <p>
             <label for="np_id">nomProprietaire</label> :
-            <input type="text" <?php echo "value=\"" . htmlspecialchars($np) . "\"" ?> name="nomProprietaire" id="np_id" required/>
+            <input type="text" placeholder="Ex : JuifMan" name="nomProprietaire" id="np_id" required/>
         </p> 
         <p>
             <input type="submit" value="Envoyer" />

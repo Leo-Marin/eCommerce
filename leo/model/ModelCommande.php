@@ -19,7 +19,7 @@ class ModelCommande extends Model {
     private $date;
     private $numLivre;
     private $numClient;
-    protected static $objet = 'commande';
+    protected static $object = 'commande';
     protected static $primary='numCommande';
     
     public function __construct($d = NULL, $nl = NULL, $ncl = NULL) {

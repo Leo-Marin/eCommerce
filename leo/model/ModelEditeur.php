@@ -52,7 +52,7 @@ class ModelEditeur extends Model {
         return $this->nom;
     }
 
-    public function getNationalie() {
+    public function getNationalite() {
         return $this->nationalite;
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once File::build_path(["model", "ModelLivre.php"]);
+require_once File::build_path(["model", "ModelClient.php"]);
 
 class ControllerClient {
 
@@ -36,17 +36,22 @@ class ControllerClient {
     }
 
     public static function created() {
-        $p = $_GET['prenom'];
-        $n = $_GET['nom'];
-        $ap = $_GET['adressePostale'];
-        $am = $_GET['adresseMail'];
-
-
-        $client1 = new ModelClient($p, $n, $ap, $am);
-        $client1->save();
-        ControllerClient::selectAll();
+        $data = array(
+            "nom" => $_GET["nom"],
+            "prenom" => $_GET["prenom"],
+            "adressePostale" => $_GET["adressePostale"],
+            "adresseMail" => $_GET["adresseMail"],
+        );
+        $client1 = new ModelClient($_GET['nom'], $_GET['prenom'], $_GET['adressePostale'], $_GET['adresseMail']);
+        ModelClient::save($data);
+        $tab_c = ModelClient::selectAll();
+        $controller = ('client');
+        $view = 'created';
+        $pagetitle = 'Liste des clients';
+        require (File::build_path(array("view", "view.php")));
     }
-
+    
+    
     public static function delete() {
 
         $tab_c = ModelClient::selectAll();     //appel au modèle pour gerer la BD

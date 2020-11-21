@@ -36,14 +36,18 @@ class ControllerEditeur {
     }
 
     public static function created() {
-        //$ne = $_GET['numEditeur'];
-        $n = $_GET['nom'];
-        $na = $_GET['nationalite'];
-        $np = $_GET['nomProprietaire'];
-
-        $edit1 = new ModelEditeur(/* $ne, */ $n, $na, $np);
-        $edit1->save();
-        ControllerEditeur::selectAll();
+        $data = array(
+            "nom" => $_GET["nom"],
+            "nationalite" => $_GET["nationalite"],
+            "nomProprietaire" => $_GET["nomProprietaire"],
+        );
+        $editeur1 = new ModelEditeur($_GET['nom'], $_GET['nationalite'], $_GET['nomProprietaire']);
+        ModelEditeur::save($data);
+        $tab_e = ModelEditeur::selectAll();
+        $controller = ('editeur');
+        $view = 'created';
+        $pagetitle = 'Liste des editeurs';
+        require (File::build_path(array("view", "view.php")));
     }
 
     public static function error() {

@@ -1,6 +1,5 @@
 <?php
 
-
 require_once File::build_path(["model", "ModelAuteur.php"]);
 
 class ControllerAuteur {
@@ -38,20 +37,27 @@ class ControllerAuteur {
         require File::build_path(array("view", "view.php"));
     }
 
+
     public static function created() {
-        $nom = $_GET['nom'];
-        $prenom = $_GET['prenom'];
-        $nationalite = $_GET['nationalite'];
-        $dateNaissance = $_GET['dateNaissance'];
-        $auteur1 = new ModelAuteur($nom, $prenom, $nationalite, $dateNaissance);
-        $auteur1->save();
-        ControllerAuteur::selectAll();
+        $data = array(
+            "nom" => $_GET["nom"],
+            "prenom" => $_GET["prenom"],
+            "nationalite" => $_GET["nationalite"],
+            "dateNaissance" => $_GET["dateNaissance"]
+        );
+        $auteur1 = new ModelAuteur($_GET['nom'], $_GET['prenom'], $_GET['nationalite'], $_GET['dateNaissance']);
+        ModelAuteur::save($data);
+        $tab_aut = ModelAuteur::selectAll();
+        $controller = ('auteur');
+        $view = 'created';
+        $pagetitle = 'Liste des auteurs';
+        require (File::build_path(array("view", "view.php")));
     }
 
     public static function delete() {
 
         $tab_aut = ModelAuteur::selectAll();     //appel au modèle pour gerer la BD
-        $numaut= $_GET["numAuteur"];
+        $numaut = $_GET["numAuteur"];
         $aut = ModelAuteur::select($numaut);
         if ($aut == null) {
             $pagetitle = 'Auteur innexistant';

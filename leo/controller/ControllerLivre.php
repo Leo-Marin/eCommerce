@@ -35,18 +35,26 @@ class ControllerLivre {
         require File::build_path(array("view", "view.php"));
     }
 
-    public static function created() {
-        $na = $_GET['numAuteur'];
-        $d = $_GET['datePublication'];
-        $la = $_GET['langue'];
-        $t = $_GET['titre'];
-        $c = $_GET['categorie'];
-        $nbp = $_GET['nbPage'];
-        $ne = $_GET['numEditeur'];
-        $f = $_GET['format'];
-        $livre1 = new ModelLivre($na, $d, $la, $t, $c, $nbp, $ne, $f);
-        $livre1->save();
-        ControllerLivre::selectAll();
+
+        public static function created() {
+        $data = array(
+            "numAuteur" => $_GET["numAuteur"],
+            "datePublication" => $_GET["datePublication"],
+            "langue" => $_GET["langue"],
+            "titre" => $_GET["titre"],
+            "categorie" => $_GET["categorie"],
+            "nbPage" => $_GET["nbPage"],
+            "numEditeur" => $_GET["numEditeur"],
+            "format" => $_GET["format"]
+            
+        );
+        $livre1 = new ModelLivre($_GET['numAuteur'],$_GET['datePublication'],$_GET['langue'], $_GET['titre'], $_GET['categorie'], $_GET['nbPage'], $_GET['numEditeur'], $_GET['format']);
+        ModelLivre::save($data);
+        $tab_l = ModelLivre::selectAll();
+        $controller = ('livre');
+        $view = 'created';
+        $pagetitle = 'Liste des livres';
+        require (File::build_path(array("view", "view.php")));
     }
 
     public static function error() {
