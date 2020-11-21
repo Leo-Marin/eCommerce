@@ -15,8 +15,8 @@ class ControllerEditeur {
     public static function read() {
         $controller = 'editeur';
         $pagetitle = 'Editeur Caracterisations';
-        $nume = $_GET['numEditeur'];
-        $e = ModelEditeur::select($nume);
+        $ne = $_GET['numEditeur'];
+        $e = ModelEditeur::select($ne);
 
         if ($e == null) {
             $view = 'error';
@@ -56,15 +56,15 @@ class ControllerEditeur {
     public static function delete() {
 
         $tab_e = ModelEditeur::selectAll();     //appel au modèle pour gerer la BD
-        $nume = $_GET["numEditeur"];
-        $e = ModelEditeur::select($nume);
+        $ne = $_GET["numEditeur"];
+        $e = ModelEditeur::select($ne);
         if ($e == null) {
             $pagetitle = 'Editeur innexistant';
             $controller = ('editeur');
             $view = 'error';
             require (File::build_path(array("view", "view.php")));
         } else {
-            ModelEditeur::delete($nume);
+            ModelEditeur::delete($ne);
             $controller = ('editeur');
             $view = 'deleted';
             $pagetitle = 'Suppression du editeur';
@@ -78,9 +78,9 @@ class ControllerEditeur {
         $pagetitle = 'Mise à jour infos editeur';
         $nume = $_GET["numEditeur"];
         $e = ModelEditeur::select($nume);
-        $ne = $l->getnumEditeur();
-        $n = $l->getNationalie();
-        $np = $l->getnomProprietaire();
+        $ne = $e->getnumEditeur();
+        $n = $e->getNationalie();
+        $np = $e->getnomProprietaire();
 
 
         if ($e == null) {

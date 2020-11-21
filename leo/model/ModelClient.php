@@ -13,14 +13,14 @@
  */
 require_once File::build_path(array("model", "Model.php"));
 
-class ModelClient {
+class ModelClient extends Model {
 
-
+    private $numClient;
     private $prenom;
     private $nom;
     private $adressePostale;
     private $adresseMail;
-    protected static $objet = 'client';
+    protected static $object = 'client';
     protected static $primary='numClient';
     
     public function __construct($p = NULL, $n = NULL, $ap = NULL, $am = NULL) {
@@ -70,7 +70,7 @@ class ModelClient {
         }
     }
 
-    public static function getAllClient() {
+ /*   public static function getAllClient() {
         $rep = (Model::$pdo)->query("Select * From client");
         $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelClient');
         $tab_cliquos = $rep->fetchAll();
@@ -124,5 +124,5 @@ class ModelClient {
             die();
         }
     }
-
+*/
 }

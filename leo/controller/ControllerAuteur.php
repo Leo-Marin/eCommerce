@@ -1,6 +1,5 @@
 <?php
 
-
 require_once File::build_path(["model", "ModelAuteur.php"]);
 
 class ControllerAuteur {
@@ -51,7 +50,7 @@ class ControllerAuteur {
     public static function delete() {
 
         $tab_aut = ModelAuteur::selectAll();     //appel au modèle pour gerer la BD
-        $numaut= $_GET["numAuteur"];
+        $numaut = $_GET["numAuteur"];
         $aut = ModelAuteur::select($numaut);
         if ($aut == null) {
             $pagetitle = 'Auteur innexistant';

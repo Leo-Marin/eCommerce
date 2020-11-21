@@ -16,8 +16,8 @@
             <input type="text" placeholder="Ex : DD/MM/YYYY" name="datePublication" id="datep_id" required/>
         </p>
         <p>
-            <label for="l_id">langue</label> :
-            <input type="text" placeholder="Ex : Anglais" name="langue" id="l_id" required/>
+            <label for="la_id">langue</label> :
+            <input type="text" placeholder="Ex : Anglais" name="langue" id="la_id" required/>
         </p>
         <p>
             <label for="t_id">titre</label> :

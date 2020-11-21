@@ -1,9 +1,9 @@
 
 <?php
-echo "<li> Numéro Client : " . htmlspecialchars($client->getnumClient()) . "</li>" .
- "<li> Prenom : " . htmlspecialchars($client->getPrenom()) . "</li>" .
- "<li> Nom : " . htmlspecialchars($client->getNom()) . "</li>".
- "<li> Adresse Postale : " . htmlspecialchars($client->getadressePostale()) . "</li>".
- "<li> Adresse Mail : " . htmlspecialchars($client->getadresseMail()) . "</li>";
+echo "<li> Numéro Client : " . htmlspecialchars($c->getnumClient()) . "</li>" .
+ "<li> Prenom : " . htmlspecialchars($c->getPrenom()) . "</li>" .
+ "<li> Nom : " . htmlspecialchars($c->getNom()) . "</li>".
+ "<li> Adresse Postale : " . htmlspecialchars($c->getadressePostale()) . "</li>".
+ "<li> Adresse Mail : " . htmlspecialchars($c->getadresseMail()) . "</li>";
 
 ?>

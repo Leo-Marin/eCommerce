@@ -8,17 +8,17 @@ class ControllerClient {
         $view = 'list';
         $pagetitle = 'Liste des Clients';
         $controller = 'client';
-        $tab_cliquos = ModelClient::getAllClient();     //appel au modèle pour gerer la BD
+        $tab_c = ModelClient::selectAll();     //appel au modèle pour gerer la BD
         require File::build_path(array("view", "view.php"));  //"redirige" vers la vue
     }
 
     public static function read() {
         $controller = 'client';
         $pagetitle = 'Client details';
-        $numcl = $_GET['numClient'];
-        $client = ModelClient::select($numl);
+        $numc = $_GET['numClient'];
+        $c = ModelClient::select($numc);
 
-        if ($client == null) {
+        if ($c == null) {
             $view = 'error';
             require File::build_path(array("view", "view.php"));
         } else {
@@ -36,16 +36,74 @@ class ControllerClient {
     }
 
     public static function created() {
-        $nc = $_GET['numClient'];
         $p = $_GET['prenom'];
         $n = $_GET['nom'];
         $ap = $_GET['adressePostale'];
         $am = $_GET['adresseMail'];
 
 
-        $client1 = new ModelClient($nc, $p, $n, $ap, $am);
+        $client1 = new ModelClient($p, $n, $ap, $am);
         $client1->save();
         ControllerClient::selectAll();
+    }
+
+    public static function delete() {
+
+        $tab_c = ModelClient::selectAll();     //appel au modèle pour gerer la BD
+        $numc = $_GET["numClient"];
+        $c = ModelClient::select($numc);
+        if ($c == null) {
+            $pagetitle = 'Client innexistant';
+            $controller = ('client');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
+        } else {
+            ModelClient::delete($numc);
+            $controller = ('client');
+            $view = 'deleted';
+            $pagetitle = 'Suppression du client';
+            require (File::build_path(array("view", "view.php")));
+        }
+    }
+
+    public static function update() {
+        $act = "updated";
+        $form = "readonly";
+        $pagetitle = 'Mise à jour infos client';
+        $numc = $_GET["numClient"];
+        $c = ModelClient::select($numc);
+        $nc = $c->getnumClient();
+        $p = $c->getPrenom();
+        $n = $c->getNom();
+        $ap = $c->getadressePostale();
+        $am = $c->getadresseMail();
+
+        if ($c == null) {
+            $controller = ('client');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
+        } else {
+            $controller = 'client';
+            $view = 'update';
+            require (File::build_path(array("view", "view.php")));
+        }
+    }
+
+    public static function updated() {
+        $tab_c = ModelClient::selectAll();
+        $pagetitle = 'Client mis à jour';
+        $numc = $_GET["numClient"];
+        $data = array(
+            "nom" => $_GET["nom"],
+            "prenom" => $_GET["prenom"],
+            "adressePostale" => $_GET["adressePostale"],
+            "adresseMail" => $_GET["adresseMail"],
+        );
+        $c = ModelClient::select($numc);
+        $c->update($data);
+        $controller = "client";
+        $view = 'updated';
+        require (File::build_path(array("view", "view.php")));
     }
 
 }

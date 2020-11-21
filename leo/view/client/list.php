@@ -1,5 +1,5 @@
 <?php
 
-foreach ($tab_cliquos as $client)
-    echo '<p> Client' . $client->getnumClient() . $client->getPrenom(). $client->getNom() . '</p>';
+foreach ($tab_c as $c)
+    echo '<p> Client' . $c->getnumClient() . $c->getPrenom(). $c->getNom() . '</p>';
 ?>

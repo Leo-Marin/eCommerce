@@ -3,9 +3,9 @@
 
 
     <body>
-        <form method="get" action="index.php" controller="auteur">
+        <form method="get" action="index.php" controller="livre">
             <fieldset>
-                <legend>Infos auteur :</legend>
+                <legend>Infos livre :</legend>
                 <p> 
                     <input type ="hidden" name ="action" value=<?php echo "\"$act\"" ?>/>
                     <label for="na_id">numAuteur</label> :
@@ -16,8 +16,8 @@
                     <input type="text" <?php echo "value=\"" . htmlspecialchars($d) . "\"" ?> name="datePublication" id="datep_id" required/>
                 </p>
                 <p>
-                    <label for="l_id">langue</label> :
-                    <input type="text" <?php echo "value=\"" . htmlspecialchars($l) . "\"" ?> name="langue" id="l_id" required/>
+                    <label for="la_id">langue</label> :
+                    <input type="text" <?php echo "value=\"" . htmlspecialchars($la) . "\"" ?> name="langue" id="la_id" required/>
                 </p>
                 <p>
                     <label for="t_id">titre</label> :

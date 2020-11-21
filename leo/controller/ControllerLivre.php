@@ -8,7 +8,7 @@ class ControllerLivre {
         $view = 'list';
         $pagetitle = 'Liste des Livres';
         $controller = 'livre';
-        $tab_livre = ModelLivre::selectAll();     //appel au modèle pour gerer la BD
+        $tab_l = ModelLivre::selectAll();     //appel au modèle pour gerer la BD
         require File::build_path(array("view", "view.php"));  //"redirige" vers la vue
     }
 
@@ -16,9 +16,9 @@ class ControllerLivre {
         $controller = 'livre';
         $pagetitle = 'livre Caracterisations';
         $numl = $_GET['numLivre'];
-        $livre = ModelLivre::select($numl);
+        $l = ModelLivre::select($numl);
 
-        if ($livre == null) {
+        if ($l == null) {
             $view = 'error';
             require File::build_path(array("view", "view.php"));
         } else {
@@ -38,13 +38,13 @@ class ControllerLivre {
     public static function created() {
         $na = $_GET['numAuteur'];
         $d = $_GET['datePublication'];
-        $l = $_GET['langue'];
+        $la = $_GET['langue'];
         $t = $_GET['titre'];
         $c = $_GET['categorie'];
         $nbp = $_GET['nbPage'];
         $ne = $_GET['numEditeur'];
         $f = $_GET['format'];
-        $livre1 = new ModelLivre($na, $d, $l, $t, $c, $nbp, $ne, $f);
+        $livre1 = new ModelLivre($na, $d, $la, $t, $c, $nbp, $ne, $f);
         $livre1->save();
         ControllerLivre::selectAll();
     }
@@ -83,7 +83,7 @@ class ControllerLivre {
         $nl = $l->getnumLivre();
         $na = $l->getnumAuteur();
         $d = $l->getdatePublication();
-        $lan = $l->getLangue();
+        $la = $l->getLangue();
         $t = $l->getTitre();
         $c = $l->getCategorie();
         $nbp = $l->getnbPage();
