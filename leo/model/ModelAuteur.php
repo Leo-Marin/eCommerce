@@ -110,7 +110,7 @@ class ModelAuteur extends Model{
         return $tab_aut[0];
     }
 
-    public function save() {
+   /* public function save() {
         try {
             $nom = $this->nom;
             $prenom = $this->prenom;
@@ -135,6 +135,6 @@ class ModelAuteur extends Model{
             }
             die();
         }
-    }
+    }*/
 
 }
