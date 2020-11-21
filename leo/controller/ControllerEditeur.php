@@ -83,7 +83,7 @@ class ControllerEditeur {
         $nume = $_GET["numEditeur"];
         $e = ModelEditeur::select($nume);
         $ne = $e->getnumEditeur();
-        $n = $e->getNationalie();
+        $n = $e->getNationalite();
         $np = $e->getnomProprietaire();
 
 

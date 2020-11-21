@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html>
+<form method="get" action="index.php" controller="client">
+    <fieldset>
 
-
-    <body>
-        <form method="get" action="index.php" controller="client">
-            <fieldset>
-                <legend>Infos editeur :</legend>
+        <legend>Infos client :</legend>
+        <p> 
+            <input type ="hidden" name ="controller" value="client" />
+        </p>
                 <p> 
                     <input type ="hidden" name ="action" value=<?php echo "\"$act\"" ?>/>
                     <label for="nc_id">numClient</label> :
-                    <input type="text" <?php echo "value=\"" . htmlspecialchars($numc) . "\"" ?> name="numClient" id="nc_id" <?php echo "$form=\"" . htmlspecialchars($numl) . "\"" ?>/>
+                    <input type="text" <?php echo "value=\"" . htmlspecialchars($numc) . "\"" ?> name="numClient" id="nc_id" <?php echo "$form=\"" . htmlspecialchars($numc) . "\"" ?>/>
                 </p>
                 <p>
                     <label for="p_id">prenom</label> :
@@ -33,5 +32,3 @@
         </form>
 
 
-    </body>
-</html>

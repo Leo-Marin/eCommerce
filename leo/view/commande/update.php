@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html>
+<form method="get" action="index.php" controller="commande">
+    <fieldset>
 
-
-    <body>
-        <form method="get" action="index.php" controller="commande">
-            <fieldset>
-                <legend>Infos commande :</legend>
+        <legend>Infos commande:</legend>
+        <p> 
+            <input type ="hidden" name ="controller" value="commande" />
+        </p>
                 <p> 
                     <input type ="hidden" name ="action" value=<?php echo "\"$act\"" ?>/>
                     <label for="nco_id">numCommande</label> :
-                    <input type="number" <?php echo "value=\"" . htmlspecialchars($numco) . "\"" ?>  name="numCommande" id="nco_id" required/>
+                    <input type="text" <?php echo "value=\"" . htmlspecialchars($numco) . "\"" ?>  name="numCommande" id="nco_id" required <?php echo "$form=\"" . htmlspecialchars($numco) . "\"" ?>/>
                 </p>
                 <p>
                     <label for="d_id">date</label> :
@@ -28,7 +27,3 @@
                     <input type="submit" value="Envoyer" />
                 </p>
         </form>
-
-
-    </body>
-</html>

@@ -50,8 +50,7 @@ class ControllerClient {
         $pagetitle = 'Liste des clients';
         require (File::build_path(array("view", "view.php")));
     }
-    
-    
+
     public static function delete() {
 
         $tab_c = ModelClient::selectAll();     //appel au modèle pour gerer la BD
@@ -100,6 +99,7 @@ class ControllerClient {
         $numc = $_GET["numClient"];
         $data = array(
             "nom" => $_GET["nom"],
+            "numClient" => $_GET["numClient"],
             "prenom" => $_GET["prenom"],
             "adressePostale" => $_GET["adressePostale"],
             "adresseMail" => $_GET["adresseMail"],
