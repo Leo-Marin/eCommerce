@@ -52,14 +52,14 @@ class ControllerAuteur {
 
         $tab_aut = ModelAuteur::selectAll();     //appel au modèle pour gerer la BD
         $numaut= $_GET["numAuteur"];
-        $aut = ModelVoiture::select($numaut);
+        $aut = ModelAuteur::select($numaut);
         if ($aut == null) {
             $pagetitle = 'Auteur innexistant';
             $controller = ('auteur');
             $view = 'error';
             require (File::build_path(array("view", "view.php")));
         } else {
-            ModelVoiture::delete($numaut);
+            ModelAuteur::delete($numaut);
             $controller = ('auteur');
             $view = 'deleted';
             $pagetitle = 'Suppression de l\'auteur';

@@ -1,5 +1,5 @@
 <?php
 
-foreach ($tab_edit as $edit)
-    echo '<p> Editeur' . $edit->getnumEditeur() .$edit->getNom(). '</p>';
+foreach ($tab_e as $e)
+    echo '<p> Editeur' . $e->getnumEditeur() .$e->getNom(). '</p>';
 ?>

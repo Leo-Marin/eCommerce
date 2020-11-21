@@ -8,17 +8,17 @@ class ControllerEditeur {
         $view = 'list';
         $pagetitle = 'Liste des Editeur';
         $controller = 'editeur';
-        $tab_edit = ModelEditeur::selectAll();     //appel au modèle pour gerer la BD
+        $tab_e = ModelEditeur::selectAll();     //appel au modèle pour gerer la BD
         require File::build_path(array("view", "view.php"));  //"redirige" vers la vue
     }
 
     public static function read() {
         $controller = 'editeur';
         $pagetitle = 'Editeur Caracterisations';
-        $numedit = $_GET['numEditeur'];
-        $editeur = ModelEditeur::select($numedit);
+        $nume = $_GET['numEditeur'];
+        $e = ModelEditeur::select($nume);
 
-        if ($editeur == null) {
+        if ($e == null) {
             $view = 'error';
             require File::build_path(array("view", "view.php"));
         } else {
@@ -41,9 +41,74 @@ class ControllerEditeur {
         $na = $_GET['nationalite'];
         $np = $_GET['nomProprietaire'];
 
-        $edit1 = new ModelEditeur(/*$ne,*/ $n, $na, $np);
+        $edit1 = new ModelEditeur(/* $ne, */ $n, $na, $np);
         $edit1->save();
         ControllerEditeur::selectAll();
+    }
+
+    public static function error() {
+        $controller = ('editeur');
+        $view = 'error';
+        $pagetitle = 'Erreur';
+        require (File::build_path(array("view", "view.php")));
+    }
+
+    public static function delete() {
+
+        $tab_e = ModelEditeur::selectAll();     //appel au modèle pour gerer la BD
+        $nume = $_GET["numEditeur"];
+        $e = ModelEditeur::select($nume);
+        if ($e == null) {
+            $pagetitle = 'Editeur innexistant';
+            $controller = ('editeur');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
+        } else {
+            ModelEditeur::delete($nume);
+            $controller = ('editeur');
+            $view = 'deleted';
+            $pagetitle = 'Suppression du editeur';
+            require (File::build_path(array("view", "view.php")));
+        }
+    }
+
+    public static function update() {
+        $act = "updated";
+        $form = "readonly";
+        $pagetitle = 'Mise à jour infos editeur';
+        $nume = $_GET["numEditeur"];
+        $e = ModelEditeur::select($nume);
+        $ne = $l->getnumEditeur();
+        $n = $l->getNationalie();
+        $np = $l->getnomProprietaire();
+
+
+        if ($e == null) {
+            $controller = ('editeur');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
+        } else {
+            $controller = 'editeur';
+            $view = 'update';
+            require (File::build_path(array("view", "view.php")));
+        }
+    }
+
+    public static function updated() {
+        $tab_e = ModelEditeur::selectAll();
+        $pagetitle = 'Livre mis à jour';
+        $nume = $_GET["numEditeur"];
+        $data = array(
+            "numEditeur" => $_GET["numEditeur"],
+            "nom" => $_GET["nom"],
+            "nationalite" => $_GET["nationalite"],
+            "nomProprietaire" => $_GET["nomProprietaire"],
+        );
+        $e = ModelEditeur::select($nume);
+        $e->update($data);
+        $controller = "editeur";
+        $view = 'updated';
+        require (File::build_path(array("view", "view.php")));
     }
 
 }

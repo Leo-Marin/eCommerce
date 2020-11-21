@@ -21,7 +21,7 @@ class ModelAuteur extends Model{
     private $nationalite;
     private $dateNaissance;
     
-    protected static $objet = 'auteur';
+    protected static $object = "auteur";
     protected static $primary='numAuteur';
     // un getter      
 
@@ -90,7 +90,7 @@ class ModelAuteur extends Model{
         $this->nationalite= $num;
     }
     
-    public static function getAuteurByNum($num) {
+   /* public static function getAuteurByNum($num) {
         $sql = "SELECT * from auteur WHERE numAuteur=:nom_tag";
         // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);

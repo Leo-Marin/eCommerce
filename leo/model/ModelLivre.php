@@ -13,7 +13,7 @@
  */
 require_once File::build_path(array("model", "Model.php"));
 
-class ModelLivre {
+class ModelLivre extends Model{
 
     private $numLivre;
     private $numAuteur;
@@ -24,7 +24,7 @@ class ModelLivre {
     private $nbPage;
     private $numEditeur;
     private $format;
-    protected static $objet = 'livre';
+    protected static $object = 'livre';
     protected static $primary='numLivre';
     // un getter      
     // un setter 
@@ -89,7 +89,7 @@ class ModelLivre {
 
 
 
-    public static function getAllLivre() {
+    /*public static function getAllLivre() {
         $rep = (Model::$pdo)->query("Select * From livre");
         $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelLivre');
         $tab_livre = $rep->fetchAll();
@@ -148,6 +148,6 @@ class ModelLivre {
             }
             die();
         }
-    }
+    }*/
 
 }
