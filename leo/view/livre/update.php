@@ -28,7 +28,7 @@
         </p>
         <p>
             <label for="c_id">categorie</label> :
-            <input type="text" <?php echo "value=\"" . htmlspecialchars($c) . "\"" ?> name="categorie" id="c_id" required/>
+            <input type="text" <?php echo "value=\"" . htmlspecialchars($user) . "\"" ?> name="categorie" id="c_id" required/>
         </p>
         <p>
             <label for="nbp_id">nbPage</label> :

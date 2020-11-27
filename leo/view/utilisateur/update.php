@@ -1,4 +1,4 @@
-<form method="get" action="index.php" controller="client">
+<form method="get" action="index.php" controller="utilisateur">
     <fieldset>
 
         <legend>Infos client :</legend>
