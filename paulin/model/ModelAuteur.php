@@ -13,24 +13,27 @@
  */
 require_once File::build_path(array("model","Model.php"));
 
-class ModelAuteur {
+class ModelAuteur extends Model{
 
 
     private $nom;
     private $prenom;
     private $nationalite;
     private $dateNaissance;
-
+    
+    protected static $object = "auteur";
+    protected static $primary='numAuteur';
     // un getter      
 
 
-    public function __construct($p = NULL, $na = NULL, $da = NULL) {
-        if (!is_null($p) && !is_null($na) && !is_null($da)) {
+    public function __construct($n = NULL,$p = NULL, $na = NULL, $da = NULL) {
+        if (!is_null($n) &&!is_null($p) && !is_null($na) && !is_null($da)) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
             // $num = NULL,
             //$this->numAuteur = $num;
+            $this->nom = $n;
             $this->prenom = $p;
             $this->nationalite = $na;
             $this->dateNaissance = $da;
@@ -88,14 +91,7 @@ class ModelAuteur {
         $this->nationalite= $num;
     }
     
-    public static function getAllAuteurs() {
-        $rep = (Model::$pdo)->query("Select * From auteur");
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelAuteur');
-        $tab_aut = $rep->fetchAll();
-        return $tab_aut;
-    }
-
-    public static function getAuteurByNum($num) {
+   /* public static function getAuteurByNum($num) {
         $sql = "SELECT * from auteur WHERE numAuteur=:nom_tag";
         // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
@@ -115,7 +111,7 @@ class ModelAuteur {
         return $tab_aut[0];
     }
 
-    public function save() {
+   /* public function save() {
         try {
             $nom = $this->nom;
             $prenom = $this->prenom;
@@ -140,6 +136,6 @@ class ModelAuteur {
             }
             die();
         }
-    }
+    }*/
 
 }

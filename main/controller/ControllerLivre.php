@@ -31,7 +31,8 @@ class ControllerLivre {
         $view = 'create';
         $pagetitle = 'Creation livre';
         $controller = 'livre';
-
+        $tab_aut = ModelAuteur::selectAll();
+        $tab_e = ModelEditeur::selectAll(); 
         require File::build_path(array("view", "view.php"));
     }
 
@@ -87,6 +88,8 @@ class ControllerLivre {
         $form = "readonly";
         $pagetitle = 'Mise à jour infos livre';
         $numl = $_GET["numLivre"];
+        $tab_aut = ModelAuteur::selectAll();
+        $tab_e = ModelEditeur::selectAll();
         $l = ModelLivre::select($numl);
         $nl = $l->getnumLivre();
         $na = $l->getnumAuteur();
