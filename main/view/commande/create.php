@@ -9,7 +9,8 @@
         <p>
             <input type='hidden' name='action' value='created'>
             <label for="d_id">date</label> :
-            <input type="text" placeholder="Ex : DD/MM/YYYY" name="date" id="d_id" required/>
+            <?php $date=date('d/m/y H:i:s') ?>
+            <input type="text" <?php echo "value=\"" . $date . "\"" ?> name="date" id="d_id" required/>
         </p>
         <p>
             <label for="nl_id">Livre</label> :
