@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 
 $DS = DIRECTORY_SEPARATOR;
 $ROOT_FOLDER = __DIR__;

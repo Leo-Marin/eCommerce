@@ -69,6 +69,28 @@ class ModelUtilisateur extends Model {
         return $this->adresseMail;
     }
 
+    public static function checkPassword($login, $mot_de_passe_hache) {
+
+        $sql = "SELECT * from utilisateur WHERE login=:log AND mdp=:psswrd";
+// Préparation de la requête
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "log" => $login,
+            "psswrd" => $mot_de_passe_hache
+                //nomdutag => valeur, ...
+        );
+// On donne les valeurs et on exécute la requête	 
+        $req_prep->execute($values);
+
+// On récupère les résultats comme précédemment
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
+        $tab = $req_prep->fetchAll();
+// Attention, si il n'y a pas de résultats, on renvoie false
+        if (empty($tab))
+            return false;
+        else
+            return true;
+    }
 
     /*   public static function getAllClient() {
       $rep = (Model::$pdo)->query("Select * From client");

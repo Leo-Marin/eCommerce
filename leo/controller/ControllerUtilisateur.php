@@ -115,6 +115,45 @@ class ControllerUtilisateur {
         require (File::build_path(array("view", "view.php")));
     }
 
+    public static function connect() {
+        $view = 'connect';
+        $pagetitle = 'Creation Utilisateur';
+        $controller = 'utilisateur';
+
+        require File::build_path(array("view", "view.php"));
+    }
+
+    public static function connected() {
+        $_GET["login"];
+        $_GET['mdp'];
+
+        $verif = ModelUtilisateur::checkPassword($_GET["login"], Security::hacher($_GET['mdp']));
+        if ($verif) {
+            $_SESSION['login'] = $_GET["login"];
+            setcookie("connectionCookie", $_GET["login"], time() + 3600);
+            $user = $user = ModelUtilisateur::select($_GET["login"]);
+            $pagetitle = 'utilisateur mis à jour';
+            $controller = "utilisateur";
+            $view = 'detail';
+            require (File::build_path(array("view", "view.php")));
+        } else {
+            echo "ntm ton compte exsite pas";
+        }
+    }
+        public static function readLaSessions() {
+        $controller = 'utilisateur';
+        $pagetitle = 'Utilisateur details';
+        $log = $_COOKIE["connectionCookie"];
+        $user = ModelUtilisateur::select($log);
+
+        if ($user == null) {
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $view = 'detail';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
 }
 
 ?>

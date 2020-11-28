@@ -3,8 +3,8 @@
     
     <body>
         <?php
-        echo "<p>Les modifications apportées sur le client de numero " .  htmlspecialchars($numc) . " ont été enregistrées</p>" ;
-        require (File::build_path(array("view", "client", "list.php")));
+        echo "<p>Les modifications apportées sur le utilisateur de numero " .  htmlspecialchars($login) . " ont été enregistrées</p>" ;
+        require (File::build_path(array("view", "utilisateur", "list.php")));
         ?>
     </body>
 </html>

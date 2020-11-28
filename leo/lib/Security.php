@@ -6,7 +6,7 @@ class Security {
 
     private static $seed = 'Xl84MSreG2';
     public static function hacher($texte_en_clair) {
-        $texte_a_hache = "Xl84MSreG2" . $texte_a_hache;
+        $texte_a_hache = static::$seed . $texte_en_clair;
         $texte_hache = hash('sha256', $texte_a_hache);
         return $texte_hache;
     }

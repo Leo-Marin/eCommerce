@@ -9,6 +9,7 @@
         <li style="display:inline; margin-right:1em; padding: 3px; border:2px black solid"><a href = index.php?action=readAll&controller=auteur> Les Auteurs</a></li>
         <li style="display:inline; margin-right:1em; padding: 3px; border:2px black solid"><a href = index.php?action=readAll&controller=editeur> editeurs</a></li>
         <li style="display:inline; margin-right:1em; padding: 3px; border:2px black solid"><a href = index.php?action=readAll&controller=commande> commandes</a></li>
+        <li style="display:inline; margin-right:1em; padding: 3px; border:2px black solid"><a href = index.php?action=readLaSessions&controller=utilisateur> Mon compte</a></li>
 
     </ul>
 </head>
