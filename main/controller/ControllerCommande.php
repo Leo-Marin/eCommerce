@@ -31,7 +31,7 @@ class ControllerCommande {
         $view = 'create';
         $pagetitle = 'Creation Commande';
         $controller = 'commande';
-
+        $tab_l = ModelLivre::selectAll();  
         require File::build_path(array("view", "view.php"));
     }
 
@@ -74,6 +74,7 @@ class ControllerCommande {
         $form = "readonly";
         $pagetitle = 'Mise à jour infos commande';
         $numco = $_GET["numCommande"];
+        $tab_l = ModelLivre::selectAll();  
         $co = ModelCommande::select($numco);
         $nc = $co->getnumCommande();
         $d = $co->getDate();
