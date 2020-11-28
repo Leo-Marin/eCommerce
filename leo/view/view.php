@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title><?php echo $pagetitle; ?></title>
     <ul>
-        <li style="display:inline; margin-right:1em; padding: 3px; border:2px black solid"><a href = index.php?action=readAll&controller=client >Les clients</a></li>
+        <li style="display:inline; margin-right:1em; padding: 3px; border:2px black solid"><a href = index.php?action=readAll&controller=utilisateur >Les utilisateur</a></li>
         <li style="display:inline; margin-right:1em; padding: 3px; border:2px black solid"><a href = index.php?action=readAll&controller=livre>Les Livres</a></li>
         <li style="display:inline; margin-right:1em; padding: 3px; border:2px black solid"><a href = index.php?action=readAll&controller=auteur> Les Auteurs</a></li>
         <li style="display:inline; margin-right:1em; padding: 3px; border:2px black solid"><a href = index.php?action=readAll&controller=editeur> editeurs</a></li>
