@@ -1,14 +1,14 @@
-<form method="get" action="index.php" controller="client">
+<form method="get" action="index.php" controller="utilisateur">
     <fieldset>
 
         <legend>Infos client :</legend>
         <p> 
-            <input type ="hidden" name ="controller" value="client" />
+            <input type ="hidden" name ="controller" value="utilisateur" />
         </p>
                 <p> 
                     <input type ="hidden" name ="action" value=<?php echo "\"$act\"" ?>/>
-                    <label for="nc_id">numClient</label> :
-                    <input type="text" <?php echo "value=\"" . htmlspecialchars($numc) . "\"" ?> name="numClient" id="nc_id" <?php echo "$form=\"" . htmlspecialchars($numc) . "\"" ?>/>
+                    <label for="nc_id">login</label> :
+                    <input type="text" <?php echo "value=\"" . htmlspecialchars($login) . "\"" ?> name="numClient" id="nc_id" <?php echo "$form=\"" . htmlspecialchars($login) . "\"" ?>/>
                 </p>
                 <p>
                     <label for="p_id">prenom</label> :

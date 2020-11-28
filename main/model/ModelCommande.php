@@ -18,18 +18,18 @@ class ModelCommande extends Model {
     private $numCommande;
     private $date;
     private $numLivre;
-    private $numClient;
+    private $login;
     protected static $object = 'commande';
     protected static $primary='numCommande';
     
-    public function __construct($d = NULL, $nl = NULL, $ncl = NULL) {
-        if (!is_null($d) && !is_null($nl) && !is_null($ncl)) {
+    public function __construct($d = NULL, $nl = NULL, $log = NULL) {
+        if (!is_null($d) && !is_null($nl) && !is_null($log)) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
             $this->date = $d;
             $this->numLivre = $nl;
-            $this->numClient = $ncl;
+            $this->login = $log;
         }
     }
 
@@ -52,8 +52,8 @@ class ModelCommande extends Model {
         return $this->numLivre;
     }
 
-    public function getnumClient() {
-        return $this->numClient;
+    public function getLogin() {
+        return $this->login;
     }
 /*
     public static function getAllCommande() {

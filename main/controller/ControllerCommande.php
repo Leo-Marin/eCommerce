@@ -31,7 +31,7 @@ class ControllerCommande {
         $view = 'create';
         $pagetitle = 'Creation Commande';
         $controller = 'commande';
-        $tab_l = ModelLivre::selectAll();  
+        $tab_l = ModelLivre::selectAll();
         require File::build_path(array("view", "view.php"));
     }
 
@@ -39,9 +39,9 @@ class ControllerCommande {
         $data = array(
             "date" => $_GET["date"],
             "numLivre" => $_GET["numLivre"],
-            "numClient" => $_GET["numClient"],
+            "login" => $_GET["login"],
         );
-        $commande1 = new ModelCommande($_GET['date'], $_GET['numLivre'], $_GET['numClient']);
+        $commande1 = new ModelCommande($_GET['date'], $_GET['numLivre'], $_GET['login']);
         ModelCommande::save($data);
         $tab_co = ModelCommande::selectAll();
         $controller = ('commande');
@@ -74,12 +74,12 @@ class ControllerCommande {
         $form = "readonly";
         $pagetitle = 'Mise à jour infos commande';
         $numco = $_GET["numCommande"];
-        $tab_l = ModelLivre::selectAll();  
+        $tab_l = ModelLivre::selectAll();
         $co = ModelCommande::select($numco);
-        $nc = $co->getnumCommande();
+        $log = $co->getnumCommande();
         $d = $co->getDate();
         $nl = $co->getnumLivre();
-        $nc = $co->getnumClient();
+        $log = $co->getlogin();
 
 
         if ($co == null) {
@@ -101,7 +101,7 @@ class ControllerCommande {
             "numCommande" => $_GET["numCommande"],
             "date" => $_GET["date"],
             "numLivre" => $_GET["numLivre"],
-            "numClient" => $_GET["numClient"],
+            "login" => $_GET["login"],
         );
         $co = ModelCommande::select($numco);
         $co->update($data);

@@ -3,7 +3,7 @@
 require_once File::build_path(array("controller","ControllerLivre.php"));
 require_once File::build_path(array("controller", "ControllerAuteur.php"));
 require_once File::build_path(array("controller", "ControllerEditeur.php"));
-require_once File::build_path(array("controller", "ControllerClient.php"));
+require_once File::build_path(array("controller", "ControllerUtilisateur.php"));
 require_once File::build_path(array("controller", "ControllerCommande.php"));
 // On recupère l'action passée dans l'URL
 
