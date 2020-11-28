@@ -9,15 +9,20 @@
         <p>
             <input type='hidden' name='action' value='created'>
             <label for="na_id">numAuteur</label> :
-            <input type="number" placeholder="Ex : 5" name="numAuteur" id="na_id" required/>
+<!--            <input type="number" placeholder="Ex : 5" name="numAuteur" id="na_id" required/>-->
+            <select type="number" placeholder="Ex : 5" name="numAuteur" id="na_id" required>
+                foreach ($tab_aut as $aut)
+                    echo '<option value="' . htmlspecialchars($aut->getNumAuteur()). '">' . htmlspecialchars($aut->getNumAuteur()) . '</option>'
+
+            </select>
         </p>
         <p>
             <label for="datep_id">datePublication</label> :
             <input type="text" placeholder="Ex : DD/MM/YYYY" name="datePublication" id="datep_id" required/>
         </p>
         <p>
-            <label for="l_id">langue</label> :
-            <input type="text" placeholder="Ex : Anglais" name="langue" id="l_id" required/>
+            <label for="la_id">langue</label> :
+            <input type="text" placeholder="Ex : Anglais" name="langue" id="la_id" required/>
         </p>
         <p>
             <label for="t_id">titre</label> :

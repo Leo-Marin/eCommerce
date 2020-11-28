@@ -2,7 +2,7 @@
 <form method="get" action="index.php">
     <fieldset>
 
-        <legend>Passer une commande:</legend>
+        <legend>creation de Commande:</legend>
         <p> 
             <input type ="hidden" name ="controller" value="commande" />
         </p>

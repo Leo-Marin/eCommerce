@@ -2,7 +2,7 @@
 <form method="get" action="index.php">
     <fieldset>
 
-        <legend>Inscription client:</legend>
+        <legend>creation de client:</legend>
         <p> 
             <input type ="hidden" name ="controller" value="client" />
         </p>

@@ -13,13 +13,14 @@
  */
 require_once File::build_path(array("model", "Model.php"));
 
-class ModelEditeur {
+class ModelEditeur extends Model {
 
     private $numEditeur;
     private $nom;
     private $nationalite;
     private $nomProprietaire;
-
+    protected static $object = 'editeur';
+    protected static $primary='numEditeur';
      
 
     public function __construct($n = NULL, $na = NULL, $np = NULL) {
@@ -51,7 +52,7 @@ class ModelEditeur {
         return $this->nom;
     }
 
-    public function getNationalie() {
+    public function getNationalite() {
         return $this->nationalite;
     }
 
@@ -71,7 +72,7 @@ class ModelEditeur {
         $this->couleur = $couleur2;
     }
 
-    public static function getAllEditeur() {
+   /* public static function getAllEditeur() {
         $rep = (Model::$pdo)->query("Select * From editeur");
         $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelEditeur');
         $tab_edit = $rep->fetchAll();
@@ -124,5 +125,5 @@ class ModelEditeur {
             die();
         }
     }
-
+*/
 }

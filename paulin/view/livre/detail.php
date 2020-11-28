@@ -1,14 +1,13 @@
 
 <?php
-echo "<li> Numéro Livre : " . htmlspecialchars($livre->getnumLivre()) . "</li>" .
- "<li> Titre : " . htmlspecialchars($livre->getTitre()) . "</li>" .
- "<li>numéro Auteur : " . htmlspecialchars($livre->getnumAuteur()) . "</li>".
- "<li>Categorie : " . htmlspecialchars($livre->getCategorie()) . "</li>".
- "<li>Date de Publication : " . htmlspecialchars($livre->getdatePublication()) . "</li>";
- "<li> Format : " . htmlspecialchars($livre->getFormat()) . "</li>" .
- "<li>Nombre de pages : " . htmlspecialchars($livre->getnbPage()) . "</li>".
- "<li>Editeur : " . htmlspecialchars($livre->getnumEditeur()) . "</li>";
- 
- echo '<a href="index.php?controller=commande&action=create">Commander mon livre</a>'
-
+echo "<li> Numéro Livre : " . htmlspecialchars($l->getnumLivre()) . "</li>" .
+ "<li> Titre : " . htmlspecialchars($l->getTitre()) . "</li>" .
+ "<li>numéro Auteur : " . htmlspecialchars($l->getnumAuteur()) . "</li>".
+ "<li>Categorie : " . htmlspecialchars($l->getCategorie()) . "</li>".
+ "<li>Date de Publication : " . htmlspecialchars($l->getdatePublication()) . "</li>".
+ "<li> Format : " . htmlspecialchars($l->getFormat()) . "</li>" .
+ "<li>Nombre de pages : " . htmlspecialchars($l->getnbPage()) . "</li>".
+ "<li>Editeur : " . htmlspecialchars($l->getnumEditeur()) . "</li>".
+"<br><a href = index.php?action=update&controller=livre&numLivre=" . rawurlencode($l->getnumLivre()) . "> Mettre à jour Livre </a>" .
+"<br><a href = index.php?action=delete&controller=livre&numLivre=" . rawurlencode($l->getnumLivre()) . "> Supprimer Livre </a>";
 ?>

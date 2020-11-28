@@ -13,13 +13,15 @@
  */
 require_once File::build_path(array("model", "Model.php"));
 
-class ModelCommande {
+class ModelCommande extends Model {
 
     private $numCommande;
     private $date;
     private $numLivre;
     private $numClient;
-
+    protected static $object = 'commande';
+    protected static $primary='numCommande';
+    
     public function __construct($d = NULL, $nl = NULL, $ncl = NULL) {
         if (!is_null($d) && !is_null($nl) && !is_null($ncl)) {
             // Si aucun de $m, $c et $i sont nuls,
@@ -53,7 +55,7 @@ class ModelCommande {
     public function getnumClient() {
         return $this->numClient;
     }
-
+/*
     public static function getAllCommande() {
         $rep = (Model::$pdo)->query("Select * From commande");
         $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelCommande');
@@ -121,6 +123,6 @@ class ModelCommande {
             }
             die();
         }
-    }
+    }*/
 
 }
