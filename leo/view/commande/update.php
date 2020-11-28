@@ -16,11 +16,16 @@
                 </p>
                 <p>
                     <label for="nl_id">numLivre</label> :
-                    <input type="text" <?php echo "value=\"" . htmlspecialchars($nl) . "\"" ?>  name="numLivre" id="nl_id" required/>
+                    <select type="number" <?php echo "value=\"" . htmlspecialchars($nl) . "\"" ?> placeholder="Ex : 5" name="numLivre" id="nl_id" required>
+                    <?php
+                    foreach ($tab_l as $l)
+                        echo '<option value="' . htmlspecialchars($l->getnumLivre()) . '">' . htmlspecialchars($l->getnumLivre()) .'   '. htmlspecialchars($l->getTitre()). '</option>' ;
+                    ?>
+                    </select>
                 </p>
                 <p>
-                    <label for="nc_id">numClient</label> :
-                    <input type="text" <?php echo "value=\"" . htmlspecialchars($nc) . "\"" ?>  name="numClient" id="nc_id" required/>
+                    <label for="log_id">login</label> :
+                    <input type="text" <?php echo "value=\"" . htmlspecialchars($log) . "\"" ?>  name="log_id" id="nc_id" required/>
                 </p> 
 
                 <p>

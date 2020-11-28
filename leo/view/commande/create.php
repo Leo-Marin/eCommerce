@@ -9,15 +9,21 @@
         <p>
             <input type='hidden' name='action' value='created'>
             <label for="d_id">date</label> :
-            <input type="text" placeholder="Ex : DD/MM/YYYY" name="date" id="d_id" required/>
+            <?php $date=date('d/m/y H:i:s') ?>
+            <input type="text" <?php echo "value=\"" . $date . "\"" ?> name="date" id="d_id" required/>
         </p>
         <p>
-            <label for="nl_id">numLivre</label> :
-            <input type="text" placeholder="Ex : 2 " name="numLivre" id="nl_id" required/>
+            <label for="nl_id">Livre</label> :
+            <select type="number" placeholder="Ex : 5" name="numLivre" id="nl_id" required>
+                <?php
+                    foreach ($tab_l as $l)
+                        echo '<option value="' . htmlspecialchars($l->getnumLivre()) . '">' . htmlspecialchars($l->getnumLivre()) .'   '. htmlspecialchars($l->getTitre()). '</option>' ;
+                ?>
+            </select>
         </p>
         <p>
-            <label for="ncl_id">numClient</label> :
-            <input type="text" placeholder="Ex : 14 " name="numClient" id="ncl_id" required/>
+            <label for="log_id">login</label> :
+            <input type="text" placeholder="Ex : 14 " name="login" id="log_id" required/>
         </p> 
 
         <p>

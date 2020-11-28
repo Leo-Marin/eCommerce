@@ -12,7 +12,12 @@
         </p>
         <p>
             <label for="na_id">numAuteur</label> :
-            <input type="text" <?php echo "value=\"" . htmlspecialchars($na) . "\"" ?> name="numAuteur" id="na_id" />
+            <select type="number" <?php echo "value=\"" . htmlspecialchars($na) . "\"" ?> placeholder="Ex : 5" name="numAuteur" id="na_id" required>
+                <?php
+                foreach ($tab_aut as $aut)
+                    echo '<option value="' . htmlspecialchars($aut->getNumAuteur()) . '">' . htmlspecialchars($aut->getNumAuteur()) .'   '. htmlspecialchars($aut->getNom()). '</option>' ;
+                ?>
+            </select>
         </p>
         <p>
             <label for="datep_id">datePublication</label> :
@@ -28,7 +33,7 @@
         </p>
         <p>
             <label for="c_id">categorie</label> :
-            <input type="text" <?php echo "value=\"" . htmlspecialchars($user) . "\"" ?> name="categorie" id="c_id" required/>
+            <input type="text" <?php echo "value=\"" . htmlspecialchars($c) . "\"" ?> name="categorie" id="c_id" required/>
         </p>
         <p>
             <label for="nbp_id">nbPage</label> :
@@ -36,7 +41,12 @@
         </p>
         <p>
             <label for="ne_id">numEditeur</label> :
-            <input type="text" <?php echo "value=\"" . htmlspecialchars($ne) . "\"" ?> name="numEditeur" id="ne_id" required/>
+            <select type="number" <?php echo "value=\"" . htmlspecialchars($ne) . "\"" ?> placeholder="Ex : 5" name="numEditeur" id="ne_id" required>
+                <?php
+                foreach ($tab_e as $e)
+                    echo '<option value="' . htmlspecialchars($e->getnumEditeur()) . '">' . htmlspecialchars($e->getnumEditeur()) .'   '. htmlspecialchars($e->getNom()). '</option>' ;
+                ?>
+            </select>
         </p>
         <p>
             <label for="f_id">format</label> :
