@@ -2,6 +2,7 @@
 
 require_once File::build_path(["model", "ModelUtilisateur.php"]);
 require_once File::build_path(["lib", "Security.php"]);
+require_once File::build_path(["lib","Session.php"]);
 
 class ControllerUtilisateur {
 
@@ -85,7 +86,7 @@ class ControllerUtilisateur {
         $ap = $user->getadressePostale();
         $am = $user->getadresseMail();
 
-        if ($user == null) {
+        if ($user == null && !Session::is_user($login) ) {
             $controller = ('utilisateur');
             $view = 'error';
             require (File::build_path(array("view", "view.php")));
@@ -102,7 +103,7 @@ class ControllerUtilisateur {
         $login = $_GET["login"];
         $data = array(
             "login" => $_GET["login"],
-            "mdp" => Security::hacher($_GET['mdp']),
+            //"mdp" => Security::hacher($_GET['mdp']),
             "nom" => $_GET["nom"],
             "prenom" => $_GET["prenom"],
             "adressePostale" => $_GET["adressePostale"],
@@ -130,7 +131,7 @@ class ControllerUtilisateur {
         $verif = ModelUtilisateur::checkPassword($_GET["login"], Security::hacher($_GET['mdp']));
         if ($verif) {
             $_SESSION['login'] = $_GET["login"];
-            setcookie("connectionCookie", $_GET["login"], time() + 3600);
+            setcookie("connectionCookie", $_GET["login"], time() + 60);
             $user = $user = ModelUtilisateur::select($_GET["login"]);
             $pagetitle = 'utilisateur mis à jour';
             $controller = "utilisateur";
@@ -140,20 +141,32 @@ class ControllerUtilisateur {
             echo "ntm ton compte exsite pas";
         }
     }
-        public static function readLaSessions() {
+
+    public static function readLaSessions() {
         $controller = 'utilisateur';
         $pagetitle = 'Utilisateur details';
-        $log = $_COOKIE["connectionCookie"];
-        $user = ModelUtilisateur::select($log);
 
-        if ($user == null) {
-            $view = 'error';
+
+        if (isset($_SESSION['login'])) {
+            $log = $_SESSION['login'];
+            $user = ModelUtilisateur::select($log);
+            $view = 'detail';
             require File::build_path(array("view", "view.php"));
         } else {
-            $view = 'detail';
+            $view = 'error';
             require File::build_path(array("view", "view.php"));
         }
     }
+
+    public static function deconnect() {
+        session_unset();
+        $view = 'list';
+        $pagetitle = 'Liste des Livres';
+        $controller = 'livre';
+        $tab_l = ModelLivre::selectAll();     //appel au modèle pour gerer la BD
+        require File::build_path(array("view", "view.php"));
+    }
+
 }
 
 ?>

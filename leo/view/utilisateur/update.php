@@ -8,7 +8,7 @@
                 <p> 
                     <input type ="hidden" name ="action" value=<?php echo "\"$act\"" ?>/>
                     <label for="nc_id">login</label> :
-                    <input type="text" <?php echo "value=\"" . htmlspecialchars($login) . "\"" ?> name="numClient" id="nc_id" <?php echo "$form=\"" . htmlspecialchars($login) . "\"" ?>/>
+                    <input type="text" <?php echo "value=\"" . htmlspecialchars($login) . "\"" ?> name="login" id="log_id" <?php echo "$form=\"" . htmlspecialchars($login) . "\"" ?>/>
                 </p>
                 <p>
                     <label for="p_id">prenom</label> :
