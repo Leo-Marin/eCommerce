@@ -21,6 +21,7 @@ class ModelUtilisateur extends Model {
     private $nom;
     private $adressePostale;
     private $adresseMail;
+    private $admin;
     protected static $object = 'utilisateur';
     protected static $primary = 'login';
 
@@ -68,6 +69,9 @@ class ModelUtilisateur extends Model {
     public function getadresseMail() {
         return $this->adresseMail;
     }
+    public function getAdmin(){
+        return $this->admin;
+    }
 
     public static function checkPassword($login, $mot_de_passe_hache) {
 
@@ -91,6 +95,15 @@ class ModelUtilisateur extends Model {
         else
             return true;
     }
+    public static function isAdmin($login){
+            $user = ModelUtilisateur::select($login);
+            if ($user->admin == 1){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
 
     /*   public static function getAllClient() {
       $rep = (Model::$pdo)->query("Select * From client");

@@ -2,7 +2,7 @@
 
 require_once File::build_path(["model", "ModelUtilisateur.php"]);
 require_once File::build_path(["lib", "Security.php"]);
-require_once File::build_path(["lib","Session.php"]);
+require_once File::build_path(["lib", "Session.php"]);
 
 class ControllerUtilisateur {
 
@@ -60,7 +60,7 @@ class ControllerUtilisateur {
         $tab_user = ModelUtilisateur::selectAll();     //appel au modèle pour gerer la BD
         $log = $_GET["login"];
         $user = ModelUtilisateur::select($log);
-        if ($user == null) {
+        if ($user == null || !Session::is_user($log)) {
             $controller = ('utilisateur');
             $view = 'error';
             require (File::build_path(array("view", "view.php")));
@@ -86,7 +86,7 @@ class ControllerUtilisateur {
         $ap = $user->getadressePostale();
         $am = $user->getadresseMail();
 
-        if ($user == null && !Session::is_user($login) ) {
+        if ($user == null || !Session::is_user($login)) {
             $controller = ('utilisateur');
             $view = 'error';
             require (File::build_path(array("view", "view.php")));
@@ -100,20 +100,26 @@ class ControllerUtilisateur {
     public static function updated() {
         $tab_user = ModelUtilisateur::selectAll();
         $pagetitle = 'utilisateur mis à jour';
-        $login = $_GET["login"];
-        $data = array(
-            "login" => $_GET["login"],
-            //"mdp" => Security::hacher($_GET['mdp']),
-            "nom" => $_GET["nom"],
-            "prenom" => $_GET["prenom"],
-            "adressePostale" => $_GET["adressePostale"],
-            "adresseMail" => $_GET["adresseMail"],
-        );
-        $user = ModelUtilisateur::select($login);
-        $user->update($data);
-        $controller = "utilisateur";
-        $view = 'updated';
-        require (File::build_path(array("view", "view.php")));
+        $log = $_GET["login"];
+        if (Session::is_user($log)) {
+            $data = array(
+                "login" => $_GET["login"],
+                //"mdp" => Security::hacher($_GET['mdp']),
+                "nom" => $_GET["nom"],
+                "prenom" => $_GET["prenom"],
+                "adressePostale" => $_GET["adressePostale"],
+                "adresseMail" => $_GET["adresseMail"],
+            );
+            $user = ModelUtilisateur::select($login);
+            $user->update($data);
+            $controller = "utilisateur";
+            $view = 'updated';
+            require (File::build_path(array("view", "view.php")));
+        } else {
+            $controller = ('utilisateur');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
+        }
     }
 
     public static function connect() {
@@ -131,8 +137,9 @@ class ControllerUtilisateur {
         $verif = ModelUtilisateur::checkPassword($_GET["login"], Security::hacher($_GET['mdp']));
         if ($verif) {
             $_SESSION['login'] = $_GET["login"];
+            $_SESSION["admin"] = ModelUtilisateur::isAdmin($_GET["login"]); 
             setcookie("connectionCookie", $_GET["login"], time() + 60);
-            $user = $user = ModelUtilisateur::select($_GET["login"]);
+            $user = ModelUtilisateur::select($_GET["login"]);
             $pagetitle = 'utilisateur mis à jour';
             $controller = "utilisateur";
             $view = 'detail';
