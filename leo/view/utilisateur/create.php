@@ -29,7 +29,7 @@
         </p> 
         <p>
             <label for="am_id">adresseMail</label> :
-            <input type="text" placeholder="Ex : ladress.mail@mail.com" name="adresseMail" id="am_id" required/>
+            <input type="email" placeholder="Ex : ladress.mail@mail.com" name="adresseMail" id="am_id" required/>
         </p>
         <p>
             <input type="submit" value="Envoyer" />

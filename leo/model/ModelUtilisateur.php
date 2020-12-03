@@ -69,9 +69,12 @@ class ModelUtilisateur extends Model {
     public function getadresseMail() {
         return $this->adresseMail;
     }
-    public function getAdmin(){
+
+    public function getAdmin() {
         return $this->admin;
     }
+
+    //public function setAdmin(
 
     public static function checkPassword($login, $mot_de_passe_hache) {
 
@@ -95,15 +98,36 @@ class ModelUtilisateur extends Model {
         else
             return true;
     }
-    public static function isAdmin($login){
-            $user = ModelUtilisateur::select($login);
-            if ($user->admin == 1){
-                return true;
-            }
-            else {
-                return false;
-            }
+
+    public static function isAdmin($login) {
+        $user = ModelUtilisateur::select($login);
+        if ($user->admin == 1) {
+            return true;
+        } else {
+            return false;
         }
+    }
+
+    /*public static function promoAdminModel($login) {
+
+        $sql = "UPDATE utilisateur SET admin=1 WHERE login =:log";
+// Préparation de la requête
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "log" => $login,
+        );
+// On donne les valeurs et on exécute la requête	 
+        $req_prep->execute($values);
+
+// On récupère les résultats comme précédemment
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
+        $tab = $req_prep->fetchAll();
+// Attention, si il n'y a pas de résultats, on renvoie false
+        if (empty($tab))
+            return false;
+        else
+            return true;
+    }*/
 
     /*   public static function getAllClient() {
       $rep = (Model::$pdo)->query("Select * From client");

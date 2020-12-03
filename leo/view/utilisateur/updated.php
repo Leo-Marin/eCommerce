@@ -3,7 +3,7 @@
     
     <body>
         <?php
-        echo "<p>Les modifications apportées sur le utilisateur de numero " .  htmlspecialchars($login) . " ont été enregistrées</p>" ;
+        echo "<p>Les modifications apportées sur le utilisateur de numero " .  htmlspecialchars($log) . " ont été enregistrées</p>" ;
         require (File::build_path(array("view", "utilisateur", "list.php")));
         ?>
     </body>
