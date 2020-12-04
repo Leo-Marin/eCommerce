@@ -45,14 +45,25 @@ class ControllerUtilisateur {
             "prenom" => $_GET["prenom"],
             "adressePostale" => $_GET["adressePostale"],
             "adresseMail" => $_GET["adresseMail"],
+            "nonce" => Security::generateRandomHex(),
         );
-        $user1 = new ModelUtilisateur($_GET['login'], Security::hacher($_GET['mdp']), $_GET['nom'], $_GET['prenom'], $_GET['adressePostale'], $_GET['adresseMail']);
-        ModelUtilisateur::save($data);
-        $tab_user = ModelUtilisateur::selectAll();
-        $controller = ('utilisateur');
-        $view = 'created';
-        $pagetitle = 'Liste des Utilisateur';
-        require (File::build_path(array("view", "view.php")));
+        if (filter_var($_GET["adresseMail"], FILTER_VALIDATE_EMAIL)) {
+            $user1 = new ModelUtilisateur($_GET['login'], Security::hacher($_GET['mdp']), $_GET['nom'], $_GET['prenom'], $_GET['adressePostale'], $_GET['adresseMail']);
+            ModelUtilisateur::save($data);
+            $tab_user = ModelUtilisateur::selectAll();
+            //$headers = 'Content-Type: text/plain; charset=utf-8' . "\r\n";
+            $mail = '<p>Voici le lien de validation de votre compte sur LePetitMalin: <a href= \"index.php?controller=utilisateur&action=validate&login=" . $user1->getLogin() ."\">lien</a></p>';
+            $send = mail($user1->getadresseMail(), 'validé mail LePetitMalin', $mail/*, $headers*/);
+            if($send){
+                echo 'envoyé';
+            }
+            else{
+                echo 'po enovyé';
+            }
+        } else {
+            echo "adresse mail invalide";
+            self::create();
+        }
     }
 
     public static function delete() {
@@ -102,14 +113,13 @@ class ControllerUtilisateur {
         $tab_user = ModelUtilisateur::selectAll();
         $pagetitle = 'utilisateur mis à jour';
         $log = $_GET["login"];
-        if($_GET["admin"]==null){
-            $variableAdmin =0;
-        }
-        else if(Session::is_admin ()){
-            $variableAdmin =1;
-        }
-        else {
-            $variableAdmin =0;
+        if ($_GET["admin"] == null) {
+            $variableAdmin = 0;
+        } else if (Session::is_admin()) {
+            $variableAdmin = 1;
+        } else {
+            echo "t'as cru t'allais nous avoir petit malin";
+            $variableAdmin = 0;
         }
         if ((Session::is_user($log) || Session::is_admin())) {
             $data = array(
@@ -151,7 +161,7 @@ class ControllerUtilisateur {
         $_GET['mdp'];
 
         $verif = ModelUtilisateur::checkPassword($_GET["login"], Security::hacher($_GET['mdp']));
-        if ($verif) {
+        if ($verif && $_GET["nonce"] == null) {
             $_SESSION['login'] = $_GET["login"];
             $_SESSION["admin"] = ModelUtilisateur::isAdmin($_GET["login"]);
             setcookie("connectionCookie", $_GET["login"], time() + 60);
@@ -191,12 +201,16 @@ class ControllerUtilisateur {
         require File::build_path(array("view", "view.php"));
     }
 
-    public static function promoAdmin($login) {
-        if (Session::is_admin()) {
-            ModelUtilisateur::promoAdminModel($login);
-        } else {
-            echo "t'as cru t'allais nous avoir petit malin";
-            self::readAll();
+    public static function validate() {
+        $no = $_GET["nonce"];
+        $log = $_GET["login"];
+        if (ModelUtilisateur::exist($log) && ModelUtilisateur::select($log)->getNonce() == $no) {
+            $user1 = ModelUtilisateur::select($log);
+            $user1->nonceMAJ("NULL");
+            $controller = "utilisateur";
+            $view = "valide";
+            $pagetitle = "Validation compte";
+            require File::build_path(array('view', 'view.php'));
         }
     }
 

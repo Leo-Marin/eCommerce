@@ -22,6 +22,7 @@ class ModelUtilisateur extends Model {
     private $adressePostale;
     private $adresseMail;
     private $admin;
+    private $nonce;
     protected static $object = 'utilisateur';
     protected static $primary = 'login';
 
@@ -73,6 +74,13 @@ class ModelUtilisateur extends Model {
     public function getAdmin() {
         return $this->admin;
     }
+    public function getNonce(){
+        return $this->nonce;    
+    }
+
+    public function setNonce($nonce) {
+        $this->nonce = $nonce;
+    }
 
     //public function setAdmin(
 
@@ -108,26 +116,56 @@ class ModelUtilisateur extends Model {
         }
     }
 
-    /*public static function promoAdminModel($login) {
+    public static function exist($login) {
+        try {
+            $sql = "SELECT COUNT(*) FROM utilisateur WHERE login = :login";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "login" => $login,
+            );
+            $req_prep->execute($values);
+            $nbr = $req_prep->fetchColumn();
+            return $nbr == 1;
+        } catch (Exception $excep) {
+            echo "vroum vroum ca existe pas erreur";
+        }
+    }
 
-        $sql = "UPDATE utilisateur SET admin=1 WHERE login =:log";
-// Préparation de la requête
-        $req_prep = Model::$pdo->prepare($sql);
-        $values = array(
-            "log" => $login,
-        );
-// On donne les valeurs et on exécute la requête	 
-        $req_prep->execute($values);
+    public function nonceMAJ($nonce) {
+        try {
+            $sql = "UPDATE utilisateur SET nonce = :nonce WHERE login = :login";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "nonce" => $nonce,
+                "login" => $this->getLogin(),
+            );
+            $req_prep->execute($values);
+            $this->setNonce($nonce);
+        } catch (Exception $excep) {
+            echo "vroum vroum update de nonce echec";
+        }
+    }
 
-// On récupère les résultats comme précédemment
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
-        $tab = $req_prep->fetchAll();
-// Attention, si il n'y a pas de résultats, on renvoie false
-        if (empty($tab))
-            return false;
-        else
-            return true;
-    }*/
+    /* public static function promoAdminModel($login) {
+
+      $sql = "UPDATE utilisateur SET admin=1 WHERE login =:log";
+      // Préparation de la requête
+      $req_prep = Model::$pdo->prepare($sql);
+      $values = array(
+      "log" => $login,
+      );
+      // On donne les valeurs et on exécute la requête
+      $req_prep->execute($values);
+
+      // On récupère les résultats comme précédemment
+      $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
+      $tab = $req_prep->fetchAll();
+      // Attention, si il n'y a pas de résultats, on renvoie false
+      if (empty($tab))
+      return false;
+      else
+      return true;
+      } */
 
     /*   public static function getAllClient() {
       $rep = (Model::$pdo)->query("Select * From client");

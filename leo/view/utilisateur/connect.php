@@ -16,7 +16,7 @@
             <input type="password" name="mdp" id="mdp_id" required/>
         </p>
         <p>
-            <input type="submit" value="Envoyer" />
+            <input type="submit" value="Se connecter" />
         </p>
     </fieldset> 
 </form>
