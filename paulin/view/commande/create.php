@@ -22,8 +22,8 @@
             </select>
         </p>
         <p>
-            <label for="ncl_id">numClient</label> :
-            <input type="text" placeholder="Ex : 14 " name="numClient" id="ncl_id" required/>
+            <label for="log_id">login</label> :
+            <input type="text" placeholder="Ex : 14 " name="login" id="log_id" required/>
         </p> 
 
         <p>

@@ -83,7 +83,7 @@ class ControllerLivre {
         }
     }
 
-    public static function update() {
+       public static function update() {
         $act = "updated";
         $form = "readonly";
         $pagetitle = 'Mise à jour infos livre';
