@@ -28,16 +28,21 @@ class ControllerLivre {
     }
 
     public static function create() {
+        if(Session::is_admin()){
         $view = 'create';
         $pagetitle = 'Creation livre';
         $controller = 'livre';
         $tab_aut = ModelAuteur::selectAll();
         $tab_e = ModelEditeur::selectAll(); 
         require File::build_path(array("view", "view.php"));
+        } else {
+            echo 'dommage petit mail';
+        }
     }
 
 
         public static function created() {
+        if(Session::is_admin()){
         $data = array(
             "numAuteur" => $_GET["numAuteur"],
             "datePublication" => $_GET["datePublication"],
@@ -56,6 +61,9 @@ class ControllerLivre {
         $view = 'created';
         $pagetitle = 'Liste des livres';
         require (File::build_path(array("view", "view.php")));
+        }else {
+            echo 'dommage petit mail';
+        }
     }
 
     public static function error() {
@@ -65,7 +73,7 @@ class ControllerLivre {
         require (File::build_path(array("view", "view.php")));
     }
     public static function delete() {
-
+        if(Session::is_admin()){
         $tab_l = ModelLivre::selectAll();     //appel au modèle pour gerer la BD
         $numl= $_GET["numLivre"];
         $l = ModelLivre::select($numl);
@@ -81,39 +89,47 @@ class ControllerLivre {
             $pagetitle = 'Suppression du livre';
             require (File::build_path(array("view", "view.php")));
         }
-    }
-
-       public static function update() {
-        $act = "updated";
-        $form = "readonly";
-        $pagetitle = 'Mise à jour infos livre';
-        $numl = $_GET["numLivre"];
-        $tab_aut = ModelAuteur::selectAll();
-        $tab_e = ModelEditeur::selectAll();
-        $l = ModelLivre::select($numl);
-        $nl = $l->getnumLivre();
-        $na = $l->getnumAuteur();
-        $d = $l->getdatePublication();
-        $la = $l->getLangue();
-        $t = $l->getTitre();
-        $c = $l->getCategorie();
-        $nbp = $l->getnbPage();
-        $ne = $l->getnumEditeur();
-        $f = $l->getFormat();
-        
-
-        if ($l == null) {
-            $controller = ('livre');
-            $view = 'error';
-            require (File::build_path(array("view", "view.php")));
         } else {
-            $controller = 'livre';
-            $view = 'update';
-            require (File::build_path(array("view", "view.php")));
+            echo 'dommage petit filou;';    
         }
     }
 
+       public static function update() {
+           if(Session::is_admin()){
+                $act = "updated";
+                $form = "readonly";
+                $pagetitle = 'Mise à jour infos livre';
+                $numl = $_GET["numLivre"];
+                $tab_aut = ModelAuteur::selectAll();
+                $tab_e = ModelEditeur::selectAll();
+                $l = ModelLivre::select($numl);
+                $nl = $l->getnumLivre();
+                $na = $l->getnumAuteur();
+                $d = $l->getdatePublication();
+                $la = $l->getLangue();
+                $t = $l->getTitre();
+                $c = $l->getCategorie();
+                $nbp = $l->getnbPage();
+                $ne = $l->getnumEditeur();
+                $f = $l->getFormat();
+
+
+                if ($l == null) {
+                    $controller = ('livre');
+                    $view = 'error';
+                    require (File::build_path(array("view", "view.php")));
+                } else {
+                    $controller = 'livre';
+                    $view = 'update';
+                    require (File::build_path(array("view", "view.php")));
+                }
+           }else{
+               echo 'dommage petit filou';
+           }
+    }
+
     public static function updated() {
+        if(Session::is_admin()){
         $tab_l = ModelLivre::selectAll();
         $pagetitle = 'Livre mis à jour';
         $numl = $_GET["numLivre"];
@@ -134,6 +150,9 @@ class ControllerLivre {
         $controller = "livre";
         $view = 'updated';
         require (File::build_path(array("view", "view.php")));
+        }else{
+            echo 'dommage petit malin';
+        }
     }
 
 

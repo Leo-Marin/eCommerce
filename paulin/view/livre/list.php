@@ -1,8 +1,11 @@
 
 <?php
 
-foreach ($tab_l as $l)
+foreach ($tab_l as $l){
     echo '<p>  Livre' . htmlspecialchars($l->getTitre()) . ' numero <a href="index.php?controller=livre&action=read&numLivre=' . rawurlencode($l->getnumLivre()) . '">' . htmlspecialchars($l->getnumLivre())  . '</a> .</p>';
+}
 
-echo '<a href="index.php?action=create&controller=livre">Formulaire pour ajouter des Livres</a>'
+if(Session::is_admin()){
+    echo '<a href="index.php?action=create&controller=livre">Formulaire pour ajouter des Livres</a>';
+}
 ?>

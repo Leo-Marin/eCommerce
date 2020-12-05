@@ -7,11 +7,15 @@ require_once File::build_path(["lib", "Session.php"]);
 class ControllerUtilisateur {
 
     public static function readAll() {
+        if(Session::is_admin()){
         $view = 'list';
         $pagetitle = 'Liste des Utilisateur';
         $controller = 'utilisateur';
         $tab_user = ModelUtilisateur::selectAll();     //appel au modèle pour gerer la BD
         require File::build_path(array("view", "view.php"));  //"redirige" vers la vue
+        }else{
+            echo 'tu nous aura pas petit malin';
+        }
     }
 
     public static function read() {
@@ -67,7 +71,6 @@ class ControllerUtilisateur {
     }
 
     public static function delete() {
-
         $tab_user = ModelUtilisateur::selectAll();     //appel au modèle pour gerer la BD
         $log = $_GET["login"];
         $user = ModelUtilisateur::select($log);
@@ -157,15 +160,15 @@ class ControllerUtilisateur {
     }
 
     public static function connected() {
-        $_POST["login"];
-        $_POST['mdp'];
+        $_GET["login"];
+        $_GET['mdp'];
 
-        $verif = ModelUtilisateur::checkPassword($_POST["login"], Security::hacher($_POST['mdp']));
-        if ($verif && $_POST["nonce"] == null) {
-            $_SESSION['login'] = $_POST["login"];
-            $_SESSION["admin"] = ModelUtilisateur::isAdmin($_POST["login"]);
-            setcookie("connectionCookie", $_POST["login"], time() + 60);
-            $user = ModelUtilisateur::select($_POST["login"]);
+        $user = ModelUtilisateur::select($_GET["login"]);
+        $verif = ModelUtilisateur::checkPassword($_GET["login"], Security::hacher($_GET['mdp']));
+        if ($verif && $user->getNonce() == null) {
+            $_SESSION['login'] = $_GET["login"];
+            $_SESSION["admin"] = ModelUtilisateur::isAdmin($_GET["login"]);
+            setcookie("connectionCookie", $_GET["login"], time() + 60);
             $pagetitle = 'utilisateur mis à jour';
             $controller = "utilisateur";
             $view = 'detail';
@@ -206,7 +209,7 @@ class ControllerUtilisateur {
         $log = $_GET["login"];
         if (ModelUtilisateur::exist($log) && ModelUtilisateur::select($log)->getNonce() == $no) {
             $user1 = ModelUtilisateur::select($log);
-            $user1->nonceMAJ("NULL");
+            $user1->nonceMAJ(null);
             $controller = "utilisateur";
             $view = "validate";
             $pagetitle = "Validation compte";

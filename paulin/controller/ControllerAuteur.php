@@ -30,15 +30,20 @@ class ControllerAuteur {
     }
 
     public static function create() {
+        if(Session::is_admin()){
         $view = 'create';
         $pagetitle = 'Creation Auteur';
         $controller = 'auteur';
 
         require File::build_path(array("view", "view.php"));
+        }else{
+            echo 'dommage petit mail';
+        }
     }
 
 
     public static function created() {
+        if(Session::is_admin()){
         $data = array(
             "nom" => $_GET["nom"],
             "prenom" => $_GET["prenom"],
@@ -52,10 +57,14 @@ class ControllerAuteur {
         $view = 'created';
         $pagetitle = 'Liste des auteurs';
         require (File::build_path(array("view", "view.php")));
+        } else {
+            echo 'dommage petit malin';
+        }
     }
 
     public static function delete() {
 
+        if(Session::is_admin()){
         $tab_aut = ModelAuteur::selectAll();     //appel au modèle pour gerer la BD
         $numaut = $_GET["numAuteur"];
         $aut = ModelAuteur::select($numaut);
@@ -71,9 +80,13 @@ class ControllerAuteur {
             $pagetitle = 'Suppression de l\'auteur';
             require (File::build_path(array("view", "view.php")));
         }
+        } else {
+            echo 'dommage petit filou'; 
+        }
     }
 
     public static function update() {
+        if(Session::is_admin()){
         $act = "updated";
         $form = "readonly";
         $pagetitle = 'Mise à jour infos auteur';
@@ -94,9 +107,13 @@ class ControllerAuteur {
             $view = 'update';
             require (File::build_path(array("view", "view.php")));
         }
+        } else {
+            echo 'essaye encore petit filou';
+        }
     }
 
     public static function updated() {
+        if(Session::is_admin()){
         $tab_aut = ModelAuteur::selectAll();
         $pagetitle = 'Auteur mis à jour';
         $numaut = $_GET["numAuteur"];
@@ -112,7 +129,11 @@ class ControllerAuteur {
         $controller = "auteur";
         $view = 'updated';
         require (File::build_path(array("view", "view.php")));
+        } else {
+            echo 'essaye encore petit mail';
+        }
     }
+    
 
 }
 
