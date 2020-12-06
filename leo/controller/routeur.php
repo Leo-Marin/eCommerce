@@ -11,7 +11,12 @@ require_once File::build_path(array("controller", "ControllerCommande.php"));
 
 
 if (!isset($_GET["controller"])){
+    if (!isset($_POST["controller"])){
     $controller = "livre";
+    }
+    else{
+        $controller = $_POST["controller"];
+    }
 }
 else{
     $controller = $_GET["controller"];
@@ -29,8 +34,14 @@ else{
 
 
 if (!isset($_GET["action"])){
-    $action = "readAll";
-}
+    if (!isset($_POST["action"])){
+        $action = "readAll";    }
+    else if(!in_array($_POST["action"], get_class_methods($controller_class))){
+    $action = "error";}
+    else {
+        $action = $_POST["action"];    }}
+
+
 else if(!in_array($_GET["action"], get_class_methods($controller_class))){
     $action = "error";
 }

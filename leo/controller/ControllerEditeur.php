@@ -28,14 +28,19 @@ class ControllerEditeur {
     }
 
     public static function create() {
+        if(Session::is_admin()){
         $view = 'create';
         $pagetitle = 'Creation d\' Editeur';
         $controller = 'editeur';
 
         require File::build_path(array("view", "view.php"));
+        }else{
+            echo 'dommage petit filou';
+        }
     }
 
     public static function created() {
+        if(Session::is_admin()){
         $data = array(
             "nom" => $_GET["nom"],
             "nationalite" => $_GET["nationalite"],
@@ -48,6 +53,9 @@ class ControllerEditeur {
         $view = 'created';
         $pagetitle = 'Liste des editeurs';
         require (File::build_path(array("view", "view.php")));
+        } else {
+            echo 'dommage petit filou';    
+        }
     }
 
     public static function error() {
@@ -58,7 +66,7 @@ class ControllerEditeur {
     }
 
     public static function delete() {
-
+        if(Session::is_admin()){
         $tab_e = ModelEditeur::selectAll();     //appel au modèle pour gerer la BD
         $ne = $_GET["numEditeur"];
         $e = ModelEditeur::select($ne);
@@ -74,9 +82,13 @@ class ControllerEditeur {
             $pagetitle = 'Suppression du editeur';
             require (File::build_path(array("view", "view.php")));
         }
+        }else{
+            echo 'tu nous aura pas petit filou';
+        }
     }
 
     public static function update() {
+        if(Session::is_admin()){
         $act = "updated";
         $form = "readonly";
         $pagetitle = 'Mise à jour infos editeur';
@@ -96,9 +108,13 @@ class ControllerEditeur {
             $view = 'update';
             require (File::build_path(array("view", "view.php")));
         }
+        }else{
+            echo 'tu nous auras pas petit malin ';
+        }
     }
 
     public static function updated() {
+        if(Session::is_admin()){
         $tab_e = ModelEditeur::selectAll();
         $pagetitle = 'Livre mis à jour';
         $nume = $_GET["numEditeur"];
@@ -113,7 +129,11 @@ class ControllerEditeur {
         $controller = "editeur";
         $view = 'updated';
         require (File::build_path(array("view", "view.php")));
+        }else{
+            echo 'dommage petit malin';
+        }
     }
+   
 
 }
 

@@ -7,11 +7,15 @@ require_once File::build_path(["lib", "Session.php"]);
 class ControllerUtilisateur {
 
     public static function readAll() {
-        $view = 'list';
-        $pagetitle = 'Liste des Utilisateur';
-        $controller = 'utilisateur';
-        $tab_user = ModelUtilisateur::selectAll();     //appel au modèle pour gerer la BD
-        require File::build_path(array("view", "view.php"));  //"redirige" vers la vue
+        if (Session::is_admin()) {
+            $view = 'list';
+            $pagetitle = 'Liste des Utilisateur';
+            $controller = 'utilisateur';
+            $tab_user = ModelUtilisateur::selectAll();     //appel au modèle pour gerer la BD
+            require File::build_path(array("view", "view.php"));  //"redirige" vers la vue
+        } else {
+            echo 'tu nous aura pas petit malin';
+        }
     }
 
     public static function read() {
@@ -47,39 +51,46 @@ class ControllerUtilisateur {
             "adresseMail" => $_GET["adresseMail"],
             "nonce" => Security::generateRandomHex(),
         );
-        if (filter_var($_GET["adresseMail"], FILTER_VALIDATE_EMAIL)) {
-            $user1 = new ModelUtilisateur($_GET['login'], Security::hacher($_GET['mdp']), $_GET['nom'], $_GET['prenom'], $_GET['adressePostale'], $_GET['adresseMail']);
-            ModelUtilisateur::save($data);
-            $tab_user = ModelUtilisateur::selectAll();
-            //$headers = 'Content-Type: text/plain; charset=utf-8' . "\r\n";
-            $mail = '<p>Voici le lien de validation de votre compte sur LePetitMalin: <a href= \"index.php?controller=utilisateur&action=validate&login=" . $user1->getLogin() ."\">lien</a></p>';
-            $send = mail($user1->getadresseMail(), 'validé mail LePetitMalin', $mail/*, $headers*/);
-            if($send){
-                echo 'envoyé';
-            }
-            else{
-                echo 'po enovyé';
+        //test si un user a pas deja se login
+        if (empty(ModelUtilisateur::select($_GET["login"]))) {
+            if (filter_var($_GET["adresseMail"], FILTER_VALIDATE_EMAIL)) {
+                $user1 = new ModelUtilisateur($_GET['login'], Security::hacher($_GET['mdp']), $_GET['nom'], $_GET['prenom'], $_GET['adressePostale'], $_GET['adresseMail']);
+                ModelUtilisateur::save($data);
+                $tab_user = ModelUtilisateur::selectAll();
+                //$headers = 'Content-Type: text/plain; charset=utf-8' . "\r\n";
+                $mail = '<p>Voici le lien de validation de votre compte sur LePetitMalin: <a href= "https://webinfo.iutmontp.univ-montp2.fr/~marinl/PHP/eCommerce/paulin/index.php?controller=utilisateur&action=validate&login=' . $user1->getLogin() . '&nonce=' . $data['nonce'] . '">lien</a></p>';
+                $send = mail($user1->getadresseMail(), 'validé mail LePetitMalin', $mail/* , $headers */);
+                if ($send) {
+                    echo 'mail envoyé';
+                } else {
+                    echo 'po enovyé';
+                }
+            } else {
+                echo "adresse mail invalide";
+                self::create();
             }
         } else {
-            echo "adresse mail invalide";
+            echo "login deja utilisé";
             self::create();
         }
     }
 
     public static function delete() {
-
         $tab_user = ModelUtilisateur::selectAll();     //appel au modèle pour gerer la BD
         $log = $_GET["login"];
         $user = ModelUtilisateur::select($log);
-        if ($user == null || !Session::is_user($log)) {
-            $controller = ('utilisateur');
-            $view = 'error';
-            require (File::build_path(array("view", "view.php")));
-        } else {
+        if ($user != null || Session::is_user($log) || Session::is_admin()) {
             ModelUtilisateur::delete($log);
+            if(Session::is_user($log)){
+                session_unset();
+            }
             $controller = ('utilisateur');
             $view = 'deleted';
             $pagetitle = 'Suppression du Utilisateur';
+            require (File::build_path(array("view", "view.php")));
+        } else {
+            $controller = ('utilisateur');
+            $view = 'error';
             require (File::build_path(array("view", "view.php")));
         }
     }
@@ -157,15 +168,15 @@ class ControllerUtilisateur {
     }
 
     public static function connected() {
-        $_GET["login"];
-        $_GET['mdp'];
+        $_POST["login"];
+        $_POST['mdp'];
 
-        $verif = ModelUtilisateur::checkPassword($_GET["login"], Security::hacher($_GET['mdp']));
-        if ($verif && $_GET["nonce"] == null) {
-            $_SESSION['login'] = $_GET["login"];
-            $_SESSION["admin"] = ModelUtilisateur::isAdmin($_GET["login"]);
-            setcookie("connectionCookie", $_GET["login"], time() + 60);
-            $user = ModelUtilisateur::select($_GET["login"]);
+        $user = ModelUtilisateur::select($_POST["login"]);
+        $verif = ModelUtilisateur::checkPassword($_POST["login"], Security::hacher($_POST['mdp']));
+        if ($verif && $user->getNonce() == null) {
+            $_SESSION['login'] = $_POST["login"];
+            $_SESSION["admin"] = ModelUtilisateur::isAdmin($_POST["login"]);
+            setcookie("connectionCookie", $_POST["login"], time() + 60);
             $pagetitle = 'utilisateur mis à jour';
             $controller = "utilisateur";
             $view = 'detail';
@@ -204,13 +215,17 @@ class ControllerUtilisateur {
     public static function validate() {
         $no = $_GET["nonce"];
         $log = $_GET["login"];
-        if (ModelUtilisateur::exist($log) && ModelUtilisateur::select($log)->getNonce() == $no) {
+        $user1nonce = ModelUtilisateur::select($log)->getNonce();
+        if (ModelUtilisateur::exist($log) && $user1nonce == $no && $user1nonce != null) {
             $user1 = ModelUtilisateur::select($log);
-            $user1->nonceMAJ("NULL");
+            $user1->nonceMAJ(null);
             $controller = "utilisateur";
-            $view = "valide";
+            $view = "validate";
             $pagetitle = "Validation compte";
             require File::build_path(array('view', 'view.php'));
+        } else {
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
         }
     }
 
