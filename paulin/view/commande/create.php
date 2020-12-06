@@ -16,18 +16,17 @@
             <label for="nl_id">Livre</label> :
             <select type="number" placeholder="Ex : 5" name="numLivre" id="nl_id" required>
                 <?php
+                    if(!empty($_GET['numLivre'])){
+                        $livre=ModelLivre::select($_GET['numLivre']);
+                        echo '<option value="' . htmlspecialchars($livre->getnumLivre()) . '">' . htmlspecialchars($livre->getnumLivre()) .'   '. htmlspecialchars($livre->getTitre()). '</option>' ;
+                    }
                     foreach ($tab_l as $l)
                         echo '<option value="' . htmlspecialchars($l->getnumLivre()) . '">' . htmlspecialchars($l->getnumLivre()) .'   '. htmlspecialchars($l->getTitre()). '</option>' ;
                 ?>
             </select>
         </p>
         <p>
-            <label for="log_id">login</label> :
-            <input type="text" placeholder="Ex : 14 " name="login" id="log_id" required/>
-        </p> 
-
-        <p>
-            <input type="submit" value="Envoyer" />
+            <input type="submit" value="Confimer la commande" />
         </p>
     </fieldset> 
 </form>

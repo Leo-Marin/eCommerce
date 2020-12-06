@@ -39,9 +39,9 @@ class ControllerCommande {
         $data = array(
             "date" => $_GET["date"],
             "numLivre" => $_GET["numLivre"],
-            "login" => $_GET["login"],
+            "login" => $_SESSION["login"],
         );
-        $commande1 = new ModelCommande($_GET['date'], $_GET['numLivre'], $_GET['login']);
+        $commande1 = new ModelCommande($_GET['date'], $_GET['numLivre'], $_SESSION['login']);
         ModelCommande::save($data);
         $tab_co = ModelCommande::selectAll();
         $controller = ('commande');
