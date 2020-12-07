@@ -1,5 +1,5 @@
 
-<form method="get" action="index.php">
+<form method="post" action="index.php">
     <fieldset>
 
         <legend>CONNECTION:</legend>
@@ -16,7 +16,7 @@
             <input type="password" name="mdp" id="mdp_id" required/>
         </p>
         <p>
-            <input type="submit" value="Envoyer" />
+            <input type="submit" value="Se connecter" />
         </p>
     </fieldset> 
 </form>

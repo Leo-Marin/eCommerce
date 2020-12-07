@@ -58,7 +58,7 @@ class ControllerUtilisateur {
                 ModelUtilisateur::save($data);
                 $tab_user = ModelUtilisateur::selectAll();
                 //$headers = 'Content-Type: text/plain; charset=utf-8' . "\r\n";
-                $mail = '<p>Voici le lien de validation de votre compte sur LePetitMalin: <a href= "https://webinfo.iutmontp.univ-montp2.fr/~marinl/PHP/eCommerce/paulin/index.php?controller=utilisateur&action=validate&login=' . $user1->getLogin() . '&nonce=' . $data['nonce'] . '">lien</a></p>';
+                $mail = '<p>Voici le lien de validation de votre compte sur LePetitMalin: <a href= "https://webinfo.iutmontp.univ-montp2.fr/~marinl/PHP/eCommerce/main/index.php?controller=utilisateur&action=validate&login=' . $user1->getLogin() . '&nonce=' . $data['nonce'] . '">lien</a></p>';
                 $send = mail($user1->getadresseMail(), 'validé mail LePetitMalin', $mail/* , $headers */);
                 if ($send) {
                     echo 'mail envoyé';
