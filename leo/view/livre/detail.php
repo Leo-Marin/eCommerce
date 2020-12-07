@@ -14,7 +14,7 @@ echo "<li> Numéro Livre : " . htmlspecialchars($l->getnumLivre()) . "</li>" .
   }
   
  if(!empty($_SESSION['login'])){
-   echo '<br><a href=index.php?action=create&controller=commande&numLivre=' . rawurlencode($l->getnumLivre()) .'>acheter le livre</a>';
+   echo '<br><a href=index.php?action=ajouter&controller=panier&numLivre=' . rawurlencode($l->getnumLivre()) .'>ajouter au panier</a>';
  }
 
 ?>
