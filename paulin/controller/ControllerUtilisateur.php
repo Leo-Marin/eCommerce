@@ -124,7 +124,7 @@ class ControllerUtilisateur {
         $tab_user = ModelUtilisateur::selectAll();
         $pagetitle = 'utilisateur mis à jour';
         $log = $_GET["login"];
-        if ($_GET["admin"] == null) {
+        if (!isset($_GET["admin"])) {
             $variableAdmin = 0;
         } else if (Session::is_admin()) {
             $variableAdmin = 1;

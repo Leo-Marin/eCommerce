@@ -53,6 +53,10 @@
             <input type="text" <?php echo "value=\"" . htmlspecialchars($f) . "\"" ?> name="format" id="f_id" required/>
         </p>
         <p>
+            <label for="pri_id">prix</label> :
+            <input type="number" <?php echo "value=\"" . htmlspecialchars($pri) . "\"" ?> name="prix" id="pri_id" required/>
+        </p>
+        <p>
             <input type="submit" value="Envoyer" />
         </p>
 </form>

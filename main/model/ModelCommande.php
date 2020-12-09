@@ -20,8 +20,8 @@ class ModelCommande extends Model {
     private $numLivre;
     private $login;
     protected static $object = 'commande';
-    protected static $primary='numCommande';
-    
+    protected static $primary = 'numCommande';
+
     public function __construct($d = NULL, $nl = NULL, $log = NULL) {
         if (!is_null($d) && !is_null($nl) && !is_null($log)) {
             // Si aucun de $m, $c et $i sont nuls,
@@ -55,74 +55,29 @@ class ModelCommande extends Model {
     public function getLogin() {
         return $this->login;
     }
-/*
-    public static function getAllCommande() {
-        $rep = (Model::$pdo)->query("Select * From commande");
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelCommande');
-        $tab_comma = $rep->fetchAll();
-        return $tab_comma;
-    }
 
-    public static function getAllCommandeByClient() {
-        $rep = (Model::$pdo)->query("Select * From commande");
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelCommande');
-        $tab_comma = $rep->fetchAll();
-        return $tab_comma;
-    }
-
-    public static function getAllCommandeByLivre() {
-        $rep = (Model::$pdo)->query("Select * From commande");
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelCommande');
-        $tab_comma = $rep->fetchAll();
-        return $tab_comma;
-    }
-
-    public static function getCommandeByNum($numco) {
-        $sql = "SELECT * from commande WHERE numCommande=:nom_tag";
-        // Préparation de la requête
+    public static function selectByLogin() {
+        $table_name = static::$object;
+        $class_name = "Model" . ucfirst($table_name);
+        $primary_key = static::$primary;
+        $sql = "SELECT * from " . $table_name . " WHERE login =:nom_tag";
+// Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
 
         $values = array(
-            "nom_tag" => $numco,
+            "nom_tag" => $_SESSION["login"],
                 //nomdutag => valeur, ...
         );
-        // On donne les valeurs et on exécute la requête	 
+// On donne les valeurs et on exécute la requête	 
         $req_prep->execute($values);
 
-        // On récupère les résultats comme précédemment
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelCommande');
-        $tab_comma = $req_prep->fetchAll();
-        // Attention, si il n'y a pas de résultats, on renvoie false
-        if (empty($tab_comma))
+// On récupère les résultats comme précédemment
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
+        $tab = $req_prep->fetchAll();
+// Attention, si il n'y a pas de résultats, on renvoie false
+        if (empty($tab))
             return false;
-        return $tab_comma[0];
+        return $tab;
     }
-
-    public function save() {
-        try {
-
-            $d = $this->date;
-            $nl = $this->numLivre;
-            $ncl = $this->numClient;
-
-            $sql = "INSERT INTO commande (numCommande, date, numLivre, numClient  ) VALUES (NULL, :d, :nl, :ncl)";
-            // Préparation de la requête
-            $req_prep = Model::$pdo->prepare($sql);
-            $values = array(
-
-                "d" => $d,
-                "nl" => $nl,
-                "ncl" => $ncl
-            );
-            $req_prep->execute($values);
-        } catch (PDOException $e) {
-            if (Conf::getDebug()) {
-                echo $e->getMessage(); // affiche un message d'erreur
-            } else {
-                echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
-            }
-            die();
-        }
-    }*/
 
 }

@@ -13,11 +13,11 @@
         </p>
         <p>
             <label for="na_id">nationalite</label> :
-            <input type="text" placeholder="Ex : Juif" name="nationalite" id="na_id" required/>
+            <input type="text" placeholder="Ex : Israelien" name="nationalite" id="na_id" required/>
         </p>
         <p>
             <label for="np_id">nomProprietaire</label> :
-            <input type="text" placeholder="Ex : JuifMan" name="nomProprietaire" id="np_id" required/>
+            <input type="text" placeholder="Ex : Nezo" name="nomProprietaire" id="np_id" required/>
         </p> 
         <p>
             <input type="submit" value="Envoyer" />

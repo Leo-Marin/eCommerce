@@ -9,7 +9,7 @@
         <p>
             <input type='hidden' name='action' value='created'>
             <label for="log_id">login</label> :
-            <input type="text" placeholder="Ex : Khaled" name="login" id="log_id" required/>
+            <input type="text" placeholder="Ex : momodupont" name="login" id="log_id" required/>
         </p>
         <p>
             <label for="mdp_id">mdp</label> :
@@ -17,11 +17,11 @@
         </p>
         <p>
             <label for="p_id">prenom</label> :
-            <input type="text" placeholder="Ex : Khaled" name="prenom" id="p_id" required/>
+            <input type="text" placeholder="Ex : Mohamed" name="prenom" id="p_id" required/>
         </p>
         <p>
             <label for="n_id">nom</label> :
-            <input type="text" placeholder="Ex : ben Laden" name="nom" id="n_id" required/>
+            <input type="text" placeholder="Ex : Dupont" name="nom" id="n_id" required/>
         </p>
         <p>
             <label for="ap_id">adressePostale</label> :

@@ -1,7 +1,7 @@
 <?php
 
 require_once File::build_path(["model", "ModelCommande.php"]);
-
+require_once File::build_path(["model", "ModelLivre.php"]);
 class ControllerCommande {
 
     public static function readAll() {
@@ -17,7 +17,7 @@ class ControllerCommande {
         $pagetitle = 'Commande Details';
         $numco = $_GET['numCommande'];
         $co = ModelCommande::select($numco);
-
+        $livr = ModelLivre::select($co->getnumLivre());
         if ($numco == null) {
             $view = 'error';
             require File::build_path(array("view", "view.php"));
@@ -32,6 +32,7 @@ class ControllerCommande {
         $pagetitle = 'Creation Commande';
         $controller = 'commande';
         $tab_l = ModelLivre::selectAll();
+        $tab_user = ModelUtilisateur::selectAll();
         require File::build_path(array("view", "view.php"));
     }
 
@@ -39,9 +40,9 @@ class ControllerCommande {
         $data = array(
             "date" => $_GET["date"],
             "numLivre" => $_GET["numLivre"],
-            "login" => $_SESSION["login"],
+            "login" => $_GET["login"],
         );
-        $commande1 = new ModelCommande($_GET['date'], $_GET['numLivre'], $_SESSION['login']);
+        $commande1 = new ModelCommande($_GET['date'], $_GET['numLivre'], $_GET["login"]);
         ModelCommande::save($data);
         $tab_co = ModelCommande::selectAll();
         $controller = ('commande');
@@ -142,6 +143,14 @@ class ControllerCommande {
         $view = 'updated';
         require (File::build_path(array("view", "view.php")));
     }
+    public static function readHistorique() {
+        $view = 'list';
+        $pagetitle = 'Historique des Commandes';
+        $controller = 'commande';
+        $tab_co = ModelCommande::selectByLogin();     //appel au modèle pour gerer la BD
+        require File::build_path(array("view", "view.php"));  //"redirige" vers la vue
+    }
+    
 
 }
 

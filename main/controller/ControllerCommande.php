@@ -1,7 +1,7 @@
 <?php
 
 require_once File::build_path(["model", "ModelCommande.php"]);
-
+require_once File::build_path(["model", "ModelLivre.php"]);
 class ControllerCommande {
 
     public static function readAll() {
@@ -17,7 +17,7 @@ class ControllerCommande {
         $pagetitle = 'Commande Details';
         $numco = $_GET['numCommande'];
         $co = ModelCommande::select($numco);
-
+        $livr = ModelLivre::select($co->getnumLivre());
         if ($numco == null) {
             $view = 'error';
             require File::build_path(array("view", "view.php"));
@@ -32,6 +32,7 @@ class ControllerCommande {
         $pagetitle = 'Creation Commande';
         $controller = 'commande';
         $tab_l = ModelLivre::selectAll();
+        $tab_user = ModelUtilisateur::selectAll();
         require File::build_path(array("view", "view.php"));
     }
 
@@ -39,15 +40,48 @@ class ControllerCommande {
         $data = array(
             "date" => $_GET["date"],
             "numLivre" => $_GET["numLivre"],
-            "login" => $_SESSION["login"],
+            "login" => $_GET["login"],
         );
-        $commande1 = new ModelCommande($_GET['date'], $_GET['numLivre'], $_SESSION['login']);
+        $commande1 = new ModelCommande($_GET['date'], $_GET['numLivre'], $_GET["login"]);
         ModelCommande::save($data);
         $tab_co = ModelCommande::selectAll();
         $controller = ('commande');
         $view = 'created';
         $pagetitle = 'Liste des commandes';
         require (File::build_path(array("view", "view.php")));
+    }
+    
+    public static function validate(){
+        if (isset($_SESSION['login'])) {
+            if (isset($_COOKIE["panier"]) && !empty(unserialize($_COOKIE["panier"]))) {
+                $panier = unserialize($_COOKIE["panier"]);
+                foreach ($panier as $value) {
+                    $data = array(
+                        "date" => date("Y-m-d H:i:s"),
+                        "numLivre" => $value,
+                        "login" => $_SESSION["login"],
+                    );
+                    ModelCommande::save($data);
+                }
+                $panier = array();
+                setcookie ("panier", serialize($panier), time()+3600);
+                $_SESSION["prixPanier"] = 0;
+                $controller = 'commande';
+                $view = 'remerciement';
+                $pagetitle='Merci beaucoup';
+                require File::build_path(array('view','view.php'));
+            } else {
+                $controller = 'commande';
+                $view = 'panier';
+                $pagetitle='Panier';
+                require File::build_path(array('view','view.php'));
+            }
+        }else{
+            $controller = 'utilisateur';
+            $view = 'connect';
+            $pagetitle='Connectez-vous';
+            require File::build_path(array('view','view.php'));
+        }
     }
 
     public static function delete() {
@@ -101,7 +135,6 @@ class ControllerCommande {
             "numCommande" => $_GET["numCommande"],
             "date" => $_GET["date"],
             "numLivre" => $_GET["numLivre"],
-            "login" => $_GET["login"],
         );
         $co = ModelCommande::select($numco);
         $co->update($data);
@@ -109,6 +142,14 @@ class ControllerCommande {
         $view = 'updated';
         require (File::build_path(array("view", "view.php")));
     }
+    public static function readHistorique() {
+        $view = 'list';
+        $pagetitle = 'Historique des Commandes';
+        $controller = 'commande';
+        $tab_co = ModelCommande::selectByLogin();     //appel au modèle pour gerer la BD
+        require File::build_path(array("view", "view.php"));  //"redirige" vers la vue
+    }
+    
 
 }
 

@@ -1,7 +1,7 @@
 
 <?php
 
-echo "Aucun Client ne correspond à votre numero";
+echo "Aucun Utilisateur ne correspond à votre numero";
 ?>
 
 

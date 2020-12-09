@@ -23,10 +23,6 @@
                     ?>
                     </select>
                 </p>
-                <p>
-                    <label for="log_id">login</label> :
-                    <input type="text" <?php echo "value=\"" . htmlspecialchars($log) . "\"" ?>  name="log_id" id="nc_id" required/>
-                </p> 
 
                 <p>
                     <input type="submit" value="Envoyer" />

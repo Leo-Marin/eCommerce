@@ -124,7 +124,7 @@ class ControllerUtilisateur {
         $tab_user = ModelUtilisateur::selectAll();
         $pagetitle = 'utilisateur mis à jour';
         $log = $_GET["login"];
-        if ($_GET["admin"] == null) {
+        if (!isset($_GET["admin"])) {
             $variableAdmin = 0;
         } else if (Session::is_admin()) {
             $variableAdmin = 1;
@@ -176,13 +176,13 @@ class ControllerUtilisateur {
         if ($verif && $user->getNonce() == null) {
             $_SESSION['login'] = $_POST["login"];
             $_SESSION["admin"] = ModelUtilisateur::isAdmin($_POST["login"]);
-            setcookie("connectionCookie", $_POST["login"], time() + 60);
+//            setcookie("connectionCookie", $_POST["login"], time() + 60);
             $pagetitle = 'utilisateur mis à jour';
             $controller = "utilisateur";
             $view = 'detail';
             require (File::build_path(array("view", "view.php")));
         } else {
-            echo "ton login n'existepas ou ton mdp est faux";
+            echo "ton login n'existe pas ou ton mdp est faux ou vous n'avez pas encore validé votre compte par mail";
             self::connect();
         }
     }
