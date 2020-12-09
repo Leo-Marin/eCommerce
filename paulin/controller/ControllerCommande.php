@@ -49,6 +49,39 @@ class ControllerCommande {
         $pagetitle = 'Liste des commandes';
         require (File::build_path(array("view", "view.php")));
     }
+    
+    public static function validate(){
+        if (isset($_SESSION['login'])) {
+            if (isset($_COOKIE["panier"]) && !empty(unserialize($_COOKIE["panier"]))) {
+                $panier = unserialize($_COOKIE["panier"]);
+                foreach ($panier as $value) {
+                    $data = array(
+                        "date" => date("Y-m-d H:i:s"),
+                        "numLivre" => $value,
+                        "login" => $_SESSION["login"],
+                    );
+                    ModelCommande::save($data);
+                }
+                $panier = array();
+                setcookie ("panier", serialize($panier), time()+3600);
+                $_SESSION["prixPanier"] = 0;
+                $controller = 'commande';
+                $view = 'remerciement';
+                $pagetitle='Merci beaucoup';
+                require File::build_path(array('view','view.php'));
+            } else {
+                $controller = 'commande';
+                $view = 'panier';
+                $pagetitle='Panier';
+                require File::build_path(array('view','view.php'));
+            }
+        }else{
+            $controller = 'utilisateur';
+            $view = 'connect';
+            $pagetitle='Connectez-vous';
+            require File::build_path(array('view','view.php'));
+        }
+    }
 
     public static function delete() {
 

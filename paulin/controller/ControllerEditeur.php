@@ -35,7 +35,9 @@ class ControllerEditeur {
 
         require File::build_path(array("view", "view.php"));
         }else{
-            echo 'dommage petit filou';
+            $controller = ('editeur');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
         }
     }
 
@@ -54,7 +56,9 @@ class ControllerEditeur {
         $pagetitle = 'Liste des editeurs';
         require (File::build_path(array("view", "view.php")));
         } else {
-            echo 'dommage petit filou';    
+            $controller = ('editeur');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php"))); 
         }
     }
 
@@ -83,7 +87,9 @@ class ControllerEditeur {
             require (File::build_path(array("view", "view.php")));
         }
         }else{
-            echo 'tu nous aura pas petit filou';
+            $controller = ('editeur');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
         }
     }
 
@@ -109,7 +115,9 @@ class ControllerEditeur {
             require (File::build_path(array("view", "view.php")));
         }
         }else{
-            echo 'tu nous auras pas petit malin ';
+            $controller = ('editeur');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
         }
     }
 
@@ -130,7 +138,9 @@ class ControllerEditeur {
         $view = 'updated';
         require (File::build_path(array("view", "view.php")));
         }else{
-            echo 'dommage petit malin';
+            $controller = ('editeur');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
         }
     }
    

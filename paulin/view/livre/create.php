@@ -51,6 +51,10 @@
             <input type="text" placeholder="Ex : Audio" name="format" id="f_id" required/>
         </p>
         <p>
+            <label for="pri_id">prix</label> :
+            <input type="number" placeholder="Ex : 45" name="prix" id="pri_id" required/>
+        </p>
+        <p>
             <input type="submit" value="Envoyer" />
         </p>
     </fieldset> 

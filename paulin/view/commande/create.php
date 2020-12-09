@@ -9,7 +9,7 @@
         <p>
             <input type='hidden' name='action' value='created'>
             <label for="d_id">date</label> :
-            <?php $date=date('d/m/y H:i:s') ?>
+            <?php $date=date("Y-m-d H:i:s") ?>
             <input type="text" <?php echo "value=\"" . $date . "\"" ?> name="date" id="d_id" required/>
         </p>
         <p>

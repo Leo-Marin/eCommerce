@@ -24,14 +24,15 @@ class ModelLivre extends Model{
     private $nbPage;
     private $numEditeur;
     private $format;
+    private $prix;
     protected static $object = 'livre';
     protected static $primary='numLivre';
     // un getter      
     // un setter 
 
 
-    public function __construct($na = NULL, $d = NULL, $l = NULL, $t = NULL, $c = NULL, $nbp = NULL, $ne = NULL, $f = NULL) {
-        if (!is_null($na) && !is_null($d) && !is_null($l) && !is_null($t) && !is_null($c) && !is_null($nbp && !is_null($ne) && !is_null($f))) {
+    public function __construct($na = NULL, $d = NULL, $l = NULL, $t = NULL, $c = NULL, $nbp = NULL, $ne = NULL, $f = NULL, $pri = NULL) {
+        if (!is_null($na) && !is_null($d) && !is_null($l) && !is_null($t) && !is_null($c) && !is_null($nbp && !is_null($ne) && !is_null($f)&& !is_null($pri))) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
@@ -42,6 +43,7 @@ class ModelLivre extends Model{
             $this->nbPage = $nbp;
             $this->numEditeur = $ne;
             $this->format = $f;
+            $this->prix=$pri;
         }
     }
 
@@ -85,6 +87,10 @@ class ModelLivre extends Model{
     
     public function getFormat() {
         return $this->format;
+    }
+    
+    public function getPrix() {
+        return $this->prix;
     }
 
 
