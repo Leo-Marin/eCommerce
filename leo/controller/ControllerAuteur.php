@@ -81,7 +81,9 @@ class ControllerAuteur {
             require (File::build_path(array("view", "view.php")));
         }
         } else {
-            echo 'dommage petit filou'; 
+            $controller = ('auteur');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
         }
     }
 
@@ -108,7 +110,9 @@ class ControllerAuteur {
             require (File::build_path(array("view", "view.php")));
         }
         } else {
-            echo 'essaye encore petit filou';
+            $controller = ('auteur');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
         }
     }
 
@@ -130,7 +134,9 @@ class ControllerAuteur {
         $view = 'updated';
         require (File::build_path(array("view", "view.php")));
         } else {
-            echo 'essaye encore petit mail';
+            $controller = ('auteur');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
         }
     }
     

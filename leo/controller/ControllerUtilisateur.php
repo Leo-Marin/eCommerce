@@ -176,7 +176,7 @@ class ControllerUtilisateur {
         if ($verif && $user->getNonce() == null) {
             $_SESSION['login'] = $_POST["login"];
             $_SESSION["admin"] = ModelUtilisateur::isAdmin($_POST["login"]);
-            setcookie("connectionCookie", $_POST["login"], time() + 60);
+//            setcookie("connectionCookie", $_POST["login"], time() + 60);
             $pagetitle = 'utilisateur mis à jour';
             $controller = "utilisateur";
             $view = 'detail';

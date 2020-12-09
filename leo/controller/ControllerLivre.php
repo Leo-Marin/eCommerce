@@ -36,7 +36,9 @@ class ControllerLivre {
             $tab_e = ModelEditeur::selectAll();
             require File::build_path(array("view", "view.php"));
         } else {
-            echo 'dommage petit mail';
+            $controller = ('livre');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
         }
     }
 
@@ -50,7 +52,8 @@ class ControllerLivre {
                 "categorie" => $_GET["categorie"],
                 "nbPage" => $_GET["nbPage"],
                 "numEditeur" => $_GET["numEditeur"],
-                "format" => $_GET["format"]
+                "format" => $_GET["format"],
+                "prix" => $_GET["prix"]
             );
             $livre1 = new ModelLivre($_GET['numAuteur'], $_GET['datePublication'], $_GET['langue'], $_GET['titre'], $_GET['categorie'], $_GET['nbPage'], $_GET['numEditeur'], $_GET['format']);
             ModelLivre::save($data);
@@ -60,7 +63,9 @@ class ControllerLivre {
             $pagetitle = 'Liste des livres';
             require (File::build_path(array("view", "view.php")));
         } else {
-            echo 'dommage petit mail';
+            $controller = ('livre');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
         }
     }
 
@@ -89,7 +94,9 @@ class ControllerLivre {
                 require (File::build_path(array("view", "view.php")));
             }
         } else {
-            echo 'dommage petit filou;';
+            $controller = ('livre');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
         }
     }
 
@@ -111,6 +118,7 @@ class ControllerLivre {
             $nbp = $l->getnbPage();
             $ne = $l->getnumEditeur();
             $f = $l->getFormat();
+            $pri= $l->getPrix();
 
 
             if ($l == null) {
@@ -123,7 +131,9 @@ class ControllerLivre {
                 require (File::build_path(array("view", "view.php")));
             }
         } else {
-            echo 'dommage petit filou';
+            $controller = ('livre');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
         }
     }
 
@@ -141,7 +151,8 @@ class ControllerLivre {
                 "categorie" => $_GET["categorie"],
                 "nbPage" => $_GET["nbPage"],
                 "numEditeur" => $_GET["numEditeur"],
-                "format" => $_GET["format"]
+                "format" => $_GET["format"],
+                "prix" => $_GET["prix"]
             );
             $l = ModelLivre::select($numl);
             $l->update($data);
@@ -149,17 +160,19 @@ class ControllerLivre {
             $view = 'updated';
             require (File::build_path(array("view", "view.php")));
         } else {
-            echo 'dommage petit malin';
+            $controller = ('livre');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
         }
     }
 
     public static function ajouterPanier() {
-        $panier = unserialize($_COOKIE['panier']);
+        $panier = unserialize($_COOKIE["panier"]);
         //CONFIDITOIN
-        array_push($panier, $_GET['nl']);
-        $livre = ModelLivre::select($_GET['nl']);
-        setcookie('panier', serialize($panier), 8400);
-        $_SESSION['prix'] = $_SESSION['prix'] + $livre->getPrix();
+        array_push($panier, $_GET['numLivre']);
+        $livre = ModelLivre::select($_GET['numLivre']);
+        setcookie('panier', serialize($panier), time()+3600);
+        $_SESSION['prixPanier'] = $_SESSION['prixPanier'] + $livre->getPrix();
         //view de confir or not 
         $view = 'ajouterpanier';
         $pagetitle = 'ajoute panier';
@@ -171,16 +184,30 @@ class ControllerLivre {
         $panier = unserialize($_COOKIE['panier']);
         //CONFIDITOIN
         //avant de retirer le prix le prix retirer doit etre dans une variable et verif si le produit est dans le paneir sinon ca retire ps psk sinoin vroum vroum
-        if (in_array($_GET["nl"], $panier)) {
-        unset($panier[array_search($_GET['nl'], $panier)]);
-        sort($panier);
-        $livre = ModelLivre::select($_GET['nl']);
-        setcookie('panier', serialize($panier), 8400 * 3600);
-        $_SESSION['prix'] = $_SESSION['prix'] - $livre->getPrix();
+        if (in_array($_GET["numLivre"], $panier)) {
+            unset($panier[array_search($_GET['numLivre'], $panier)]);
+            sort($panier);
+            $livre = ModelLivre::select($_GET['numLivre']);
+            setcookie('panier', serialize($panier), time()+3600);
+            $_SESSION['prixPanier'] = $_SESSION['prixPanier'] - $livre->getPrix();
+            $controller = ('livre');
+            $view = 'supprimerpanier';
+            $pagetitle = 'Supression de produit du panier';
+            require (File::build_path(array("view", "view.php")));
+        } else {
+            $controller = ('livre');
+            $view = 'error';
+            require (File::build_path(array("view", "view.php")));
+        }
         //view de confir or not 
     }
-
-}
+    
+    public static function afficherPanier() {
+        $controller = ('livre');
+        $view = 'panier';
+        $pagetitle = 'Mon panier';
+        require (File::build_path(array("view", "view.php")));
+    }
 }
 
 ?>
