@@ -64,7 +64,8 @@ class ControllerUtilisateur {
                     echo 'mail envoyé';
                     ControllerLivre::readAll();
                 } else {
-                    echo 'erreur po enovyé, contactez le support';
+                    echo 'erreur po enovyé, contactez le support lesupportMalin@yopmail.com';
+                    ControllerLivre::readAll();
                 }
             } else {
                 echo "adresse mail invalide";
