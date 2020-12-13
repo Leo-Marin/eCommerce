@@ -62,8 +62,9 @@ class ControllerUtilisateur {
                 $send = mail($user1->getadresseMail(), 'validé mail LePetitMalin', $mail/* , $headers */);
                 if ($send) {
                     echo 'mail envoyé';
+                    ControllerLivre::readAll();
                 } else {
-                    echo 'po enovyé';
+                    echo 'erreur po enovyé, contactez le support';
                 }
             } else {
                 echo "adresse mail invalide";
